@@ -1,8 +1,9 @@
-import {AppBar,Typography, Toolbar, Box, Container} from "@mui/material";
+import {AppBar,Typography, Toolbar, Box, Container, Grid} from "@mui/material";
 import s from "./style.module.css";
 import * as React from 'react';
 import MenuHome from "./HomeComponents/MenuHome";
 import StartingModal from "./HomeComponents/StartingModal";
+import DiningGrid from "./HomeComponents/DiningGrid/DiningGrid";
 
  
 export default function HomePage() {
@@ -19,7 +20,7 @@ export default function HomePage() {
     };
 
     return (
-        <div>
+        <div style={{padding:"0px"}}>
             <StartingModal
                 modalOpen={modalOpen}
                 closeModal={closeModal}
@@ -42,15 +43,11 @@ export default function HomePage() {
                     />
                 </Toolbar>
             </AppBar>
-            <Box>
-                <img
-                    className={s.background}
-                    src="/navbackground.png"
-                    alt="Background"
-                />
-            </Box>
+            <div className={s.background}>
+                <DiningGrid/>
+            </div>
 
-
+ 
 
 
         </div>
