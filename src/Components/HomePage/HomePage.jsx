@@ -1,4 +1,4 @@
-import {AppBar,Typography, Toolbar, Modal, Box} from "@mui/material";
+import {AppBar,Typography, Toolbar, Box, Container} from "@mui/material";
 import s from "./style.module.css";
 import * as React from 'react';
 import MenuHome from "./HomeComponents/MenuHome";
@@ -20,6 +20,10 @@ export default function HomePage() {
 
     return (
         <div>
+            <StartingModal
+                modalOpen={modalOpen}
+                closeModal={closeModal}
+            />
             <AppBar className={s.appBar} position="fixed" sx={{backgroundColor: "rgb(134,15,31)"}}>
                 <Toolbar>
                     <MenuHome
@@ -38,16 +42,16 @@ export default function HomePage() {
                     />
                 </Toolbar>
             </AppBar>
-            <img
-                className={s.background}
-                src="/navbackground.png"
-                alt="Background"
-            />
+            <Box>
+                <img
+                    className={s.background}
+                    src="/navbackground.png"
+                    alt="Background"
+                />
+            </Box>
 
-            <StartingModal
-                modalOpen={modalOpen}
-                closeModal={closeModal}
-            />
+
+
 
         </div>
     );
