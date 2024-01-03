@@ -1,0 +1,22 @@
+.appBar {
+    height:7vh;
+    min-height:60px;
+}
+
+.appHeader {
+    min-Height:60px;
+    font-Family:" Garamond";
+    font-size:6vh;
+    width:100%;
+    padding-left: 3%;
+}
+
+.seal {
+    padding-left:66vw;
+    margin-right:5px;
+    height: 6.5vh;
+    min-height:60px;
+    min-width:60px;
+    width: 6.5vh;
+    filter: invert(1);
+}

@@ -1,0 +1,79 @@
+.woobutton {
+    background-image: url("/public/WooInside.jpg");
+    background-size: 100%;
+}
+
+.berkbutton {
+    background-image: url("/public/BerkInside.jpg");
+    background-size: 100%;
+}
+
+.frankbutton {
+    background-image: url("/public/FrankInside.jpg");
+    background-size: 100%;
+}
+
+.hampbutton {
+    background-image: url("/public/HampInside.jpg");
+    background-size: 100%;
+}
+
+.wooimagebox:hover {
+    opacity: 0;
+}
+
+.wooimagebox {
+    width: 100%;
+    height: 100%;
+    background-image: url("/public/WooOutside.jpg");
+    -webkit-background-size: cover;
+    -moz-background-size: cover;
+    -o-background-size: cover;
+    background-size: cover;
+    transition: 0.3s;
+}
+
+.berkimagebox:hover {
+    opacity: 0;
+}
+
+.berkimagebox {
+    width: 100%;
+    height: 100%;
+    background-image: url("/public/BerkOutside.jpg");
+    -webkit-background-size: cover;
+    -moz-background-size: cover;
+    -o-background-size: cover;
+    background-size: cover;
+    transition: 0.3s;
+}
+
+.frankimagebox:hover {
+    opacity: 0;
+}
+
+.frankimagebox {
+    width: 100%;
+    height: 100%;
+    background-image: url("/public/FrankOutside.jpg");
+    -webkit-background-size: cover;
+    -moz-background-size: cover;
+    -o-background-size: cover;
+    background-size: cover;
+    transition: 0.3s;
+}
+
+.hampimagebox:hover {
+    opacity: 0;
+}
+
+.hampimagebox {
+    width: 100%;
+    height: 100%;
+    background-image: url("/public/HampOutside.jpg");
+    -webkit-background-size: cover;
+    -moz-background-size: cover;
+    -o-background-size: cover;
+    background-size: cover;
+    transition: 0.3s;
+}

@@ -9,6 +9,10 @@ export default function NavDrawer(){
             <Routes>
                 <Route path={"/"} element={<HomePage/>}/>
                 <Route path={"/nav"} element={<HomePage/>}/>
+                <Route path={"/Worcester"} element={<HomePage/>}/>
+                <Route path={"/Franklin"} element={<HomePage/>}/>
+                <Route path={"/Hampshire"} element={<HomePage/>}/>
+                <Route path={"/Berkshire"} element={<HomePage/>}/>
             </Routes>
         </div>
         </BrowserRouter>
