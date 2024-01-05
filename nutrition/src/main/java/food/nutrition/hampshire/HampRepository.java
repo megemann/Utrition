@@ -1,11 +1,12 @@
 package food.nutrition.hampshire;
 
-import food.nutrition.Item;
 import org.bson.types.ObjectId;
 import org.springframework.data.mongodb.repository.MongoRepository;
+import org.springframework.stereotype.Repository;
 
 import java.util.Optional;
 
-public interface HampRepository extends MongoRepository<Item, ObjectId> {
-    Optional<Item> findByName(String name);
+@Repository
+public interface HampRepository extends MongoRepository<HampItem, ObjectId> {
+    Optional<HampItem> findByName(String name);
 }

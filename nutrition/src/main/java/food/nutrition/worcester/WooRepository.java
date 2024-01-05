@@ -1,11 +1,12 @@
 package food.nutrition.worcester;
 
-import food.nutrition.Item;
 import org.bson.types.ObjectId;
 import org.springframework.data.mongodb.repository.MongoRepository;
+import org.springframework.stereotype.Repository;
 
 import java.util.Optional;
 
-public interface WooRepository  extends MongoRepository<Item, ObjectId> {
-    Optional<Item> findByName(String name);
+@Repository
+public interface WooRepository  extends MongoRepository<WooItem, ObjectId> {
+    Optional<WooItem> findByName(String name);
 }

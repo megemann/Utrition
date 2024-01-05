@@ -1,11 +1,12 @@
 package food.nutrition.franklin;
 
-import food.nutrition.Item;
 import org.bson.types.ObjectId;
 import org.springframework.data.mongodb.repository.MongoRepository;
+import org.springframework.stereotype.Repository;
 
 import java.util.Optional;
 
-public interface FrankRepository extends MongoRepository<Item, ObjectId> {
-    Optional<Item> findByName(String name);
+@Repository
+public interface FrankRepository extends MongoRepository<FrankItem, ObjectId> {
+    Optional<FrankItem> findByName(String name);
 }

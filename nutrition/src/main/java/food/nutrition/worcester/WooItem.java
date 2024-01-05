@@ -1,23 +1,23 @@
-package food.nutrition;
+package food.nutrition.worcester;
 
 import lombok.AllArgsConstructor;
 import lombok.Data;
 import lombok.Getter;
 import lombok.NoArgsConstructor;
+import org.bson.types.ObjectId;
 import org.springframework.data.annotation.Id;
 import org.springframework.data.mongodb.core.mapping.Document;
-import org.bson.types.ObjectId;
 
 import java.util.List;
 
 
 @Getter
-@Document(collection = "orders")
+@Document(collection = "worcester")
 @Data
 @AllArgsConstructor
 @NoArgsConstructor
 
-public class Item {
+public class WooItem {
     @Id
     private ObjectId id;
 
@@ -83,7 +83,7 @@ public class Item {
         return daysServed;
     }
 
-    public Item(String ss, Integer cal, Float fg, Float smg, Float cg, Float sg, Float pg, String name, Float fig, List<String> daysServed) {
+    public WooItem(String ss, Integer cal, Float fg, Float smg, Float cg, Float sg, Float pg, Float fig, String name, List<String> daysServed) {
         this.ss = ss;
         this.cal = cal;
         this.fg = fg;
@@ -93,6 +93,7 @@ public class Item {
         this.pg = pg;
         this.fig = fig;
         this.name = name;
+        this.daysServed = daysServed;
     }
 }
 

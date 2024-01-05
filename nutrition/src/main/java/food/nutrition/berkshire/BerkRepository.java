@@ -1,11 +1,12 @@
 package food.nutrition.berkshire;
 
-import food.nutrition.Item;
 import org.bson.types.ObjectId;
 import org.springframework.data.mongodb.repository.MongoRepository;
+import org.springframework.stereotype.Repository;
 
 import java.util.Optional;
 
-public interface BerkRepository extends MongoRepository<Item, ObjectId> {
-    Optional<Item> findByName(String name);
+@Repository
+public interface BerkRepository extends MongoRepository<BerkItem, ObjectId> {
+    Optional<BerkItem> findByName(String name);
 }
