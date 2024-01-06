@@ -1,0 +1,53 @@
+.background {
+    position: absolute;
+    top: 7vh;
+    left: 0;
+    width: 100%;
+    height: 93%;
+    z-index: 0;
+    object-fit: cover;
+    opacity: 1;
+    background-image: url("/public/navbackground.png");
+    -webkit-background-size: cover;
+    -moz-background-size: cover;
+    -o-background-size: cover;
+    background-size: cover;
+}
+
+.form {
+    width: 50%;
+    height: 90vh;
+    border-style: solid;
+    border-width: 10px;
+    border-color: rgba(89,14,25);
+    background-color: white;
+    margin-left: 25%;
+    overflow-y: scroll;
+    border-radius: 5%;
+}
+
+.form::-webkit-scrollbar{
+    background-color: rgba(0,0,0, 0.8);
+    border-radius: 100px;
+}
+
+.form::-webkit-scrollbar-thumb:vertical{
+    background: rgba(0,0,0,0.61);
+    border-radius: 30px;
+}
+
+.form::-webkit-scrollbar-track {
+    box-shadow: inset 0 0 6px rgba(0, 0, 0, 0.3);
+  }
+
+.header {
+    width: 100%;
+    height: 60px;
+    font-size: 40px;
+    justify-self: center;
+    font-family: "Trebuchet MS";
+    background-color: rgb(134,15,31);
+    text-align: center;
+    box-shadow: inset 0 0 10px rgba(0, 0, 0, 0.3);
+    color:white;
+}

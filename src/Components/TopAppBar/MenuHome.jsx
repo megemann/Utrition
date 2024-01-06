@@ -2,9 +2,17 @@ import { Menu, MenuItem, Fade, IconButton} from "@mui/material";
 
 
 import MenuIcon from '@mui/icons-material/Menu';
-
+import { useNavigate } from "react-router-dom";
 
 export default function MenuHome({handleClick, open, handleClose, anchorEl}) {
+    const navigate = useNavigate();
+
+    const navigateCreateItem = () => {
+        navigate("/CreateItem")
+        handleClose();
+    }
+
+
     return (
         <>
             <IconButton
@@ -30,6 +38,7 @@ export default function MenuHome({handleClick, open, handleClose, anchorEl}) {
                 <MenuItem onClick={handleClose}>Profile</MenuItem>
                 <MenuItem onClick={handleClose}>My account</MenuItem>
                 <MenuItem onClick={handleClose}>Logout</MenuItem>
+                <MenuItem onClick={navigateCreateItem}>Create Item</MenuItem>
             </Menu>
         </>
     );
