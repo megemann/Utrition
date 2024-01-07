@@ -10,7 +10,7 @@ import java.util.List;
 import java.util.Optional;
 
 @RestController
-@RequestMapping("/api/berkshire")
+@RequestMapping("/api/Berkshire")
 public class BerkController {
     @Autowired
     private BerkService service;

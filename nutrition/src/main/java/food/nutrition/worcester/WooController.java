@@ -10,7 +10,7 @@ import java.util.List;
 import java.util.Optional;
 
 @RestController
-@RequestMapping("/api/worcester")
+@RequestMapping("/api/Worcester")
 public class WooController {
     @Autowired
     private WooService service;

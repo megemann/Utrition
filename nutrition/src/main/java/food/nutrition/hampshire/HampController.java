@@ -10,7 +10,7 @@ import java.util.List;
 import java.util.Optional;
 
 @RestController
-@RequestMapping("/api/hampshire")
+@RequestMapping("/api/Hampshire")
 public class HampController {
     @Autowired
     private HampService service;

@@ -10,7 +10,7 @@ import java.util.List;
 import java.util.Optional;
 
 @RestController
-@RequestMapping("/api/franklin")
+@RequestMapping("/api/Franklin")
 public class FrankController {
     @Autowired
     private FrankService service;

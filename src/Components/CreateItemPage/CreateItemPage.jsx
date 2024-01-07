@@ -6,11 +6,13 @@ import DayChecklist from "./InputComponents/DayChecklist";
 import DiningSelect from "./InputComponents/DiningSelect";
 import NutritionTextFields from "./InputComponents/NutritionTextFields";
 import FoodItem from "../../FoodItem";
+import FoodItemAPI from "../../api/itemAPI";
 
 export default function CreateItemPage() {
     const [diningHall, setDiningHall] = React.useState('');
     const [nutritionText, setNutritionText] = React.useState([]);
     const [dayList, setDayList] = React.useState([]);
+    const [item, setItem] = React.useState();
 
     const submit = () => {
         if (nutritionText[0] != undefined && dayList != [] && diningHall != '') {
@@ -27,6 +29,7 @@ export default function CreateItemPage() {
                 dayList
             );
             console.log(pushItem);
+            setItem(pushItem);
         }
         else {
             if (nutritionText[0] == undefined) {
@@ -37,8 +40,22 @@ export default function CreateItemPage() {
                 alert("Please select a Dining Hall");
             }
         }
-
     }
+
+    const postItem = async item => {
+        try {
+          const response = await FoodItemAPI.postItem(item, diningHall);
+          console.log(response);
+        } catch(err) {
+          console.log(err);
+        }
+      };
+
+    React.useEffect(() => {
+        if (item) {
+          postItem(item.state);
+        }
+      }, [item]);
 
     return (
         <>
@@ -63,7 +80,7 @@ export default function CreateItemPage() {
                         <FormGroup sx={{justifyContent:"center"}}>
                             <Button 
                                 className={s.submit}
-                                sx={{marginLeft:"43%"}}
+                                sx={{marginLeft:"43%", color: "rgb(134,15,31)"}}
                                 onClick={submit}
                                 >
                                 Submit

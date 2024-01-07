@@ -1,6 +1,5 @@
 import {Stack, TextField, Divider} from "@mui/material"
 import * as React from "react";
-import Number from "react";
 
 
 export default function NutritionTextFields({onAllFilled}) {
