@@ -2,11 +2,12 @@ import {Box, Button, Divider, FormGroup, FormControl, Stack} from "@mui/material
 import TopAppBar from "../TopAppBar/TopAppBar";
 import s from "./style.module.css"
 import * as React from "react";
-import DayChecklist from "./InputComponents/DayChecklist";
-import DiningSelect from "./InputComponents/DiningSelect";
-import NutritionTextFields from "./InputComponents/NutritionTextFields";
+import DayChecklist from "./CreateItemComponents/DayChecklist";
+import DiningSelect from "./CreateItemComponents/DiningSelect";
+import NutritionTextFields from "./CreateItemComponents/NutritionTextFields";
 import FoodItem from "../../FoodItem";
 import FoodItemAPI from "../../api/itemAPI";
+import EndingModal from "./CreateItemComponents/EndingModal";
 
 export default function CreateItemPage() {
     const [diningHall, setDiningHall] = React.useState('');
@@ -14,6 +15,10 @@ export default function CreateItemPage() {
     const [dayList, setDayList] = React.useState([]);
     const [item, setItem] = React.useState();
     const [submitted, setSubmitted] = React.useState(false);
+    
+    const [name, setName] = React.useState(false);
+    const [modalOpen, setModalOpen] = React.useState(false);
+    const closeModal = () => setModalOpen(false);
 
     const submit = () => {
         if (nutritionText[0] != undefined && dayList != [] && diningHall != '') {
@@ -47,10 +52,12 @@ export default function CreateItemPage() {
         try {
           const response = await FoodItemAPI.postItem(item, diningHall);
           console.log(response);
+          setName(item.name);
           setNutritionText([]);
           setDayList([]);
           setDiningHall("");
           setSubmitted(!submitted);
+          setModalOpen(true);
         } catch(err) {
           console.log(err);
         }
@@ -65,6 +72,7 @@ export default function CreateItemPage() {
     return (
         <>
             <TopAppBar/>
+            <EndingModal closeModal={closeModal} modalOpen={modalOpen} name={name}/>
             <div className={s.background}>
                 <Box className={s.form} justifyContent={"center"}>
                     <Box className={s.header}>

@@ -11,6 +11,7 @@ export default function DayChecklist({onCheckChange, submitted}) {
     const [thursdayChecked, setThursdayChecked] = React.useState(false);
     const [fridayChecked, setFridayChecked] = React.useState(false);
     const [saturdayChecked, setSaturdayChecked] = React.useState(false);
+    const [selectAll, setSelectAll] = React.useState(false)
 
     const handleSundayChange = (event) => {
         setSundayChecked(event.target.checked);
@@ -38,6 +39,17 @@ export default function DayChecklist({onCheckChange, submitted}) {
 
     const handleSaturdayChange = (event) => {
         setSaturdayChecked(event.target.checked);
+    }
+
+    const handleSelectAllChange = (event) => {
+        setSundayChecked(event.target.checked);
+        setMondayChecked(event.target.checked);
+        setTuesdayChecked(event.target.checked);
+        setWednesdayChecked(event.target.checked);
+        setThursdayChecked(event.target.checked);
+        setFridayChecked(event.target.checked);
+        setSaturdayChecked(event.target.checked);
+        setSelectAll(event.target.checked);
     }
 
     React.useEffect(() => {
@@ -77,6 +89,7 @@ export default function DayChecklist({onCheckChange, submitted}) {
         setThursdayChecked(false);
         setFridayChecked(false);
         setSaturdayChecked(false);
+        setSelectAll(false);
     }, [submitted]);
 
 
@@ -166,6 +179,18 @@ export default function DayChecklist({onCheckChange, submitted}) {
                             }}}
                         />} 
                 label="Saturday"
+                labelPlacement="bottom"
+                />   
+
+                <FormControlLabel 
+                control={<Checkbox
+                            checked={selectAll}
+                            onChange={handleSelectAllChange}
+                            sx={{'&.Mui-checked': {
+                                color: "rgba(89,14,25, 0.9)"
+                            }}}
+                        />} 
+                label="Select All"
                 labelPlacement="bottom"
                 />   
 
