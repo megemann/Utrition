@@ -1,10 +1,44 @@
-import {Box, MenuItem, Divider, Select, Stack, TextField, Typography} from "@mui/material"
+import {Box, Button, Divider, FormGroup, FormControl, Stack} from "@mui/material"
 import TopAppBar from "../TopAppBar/TopAppBar";
 import s from "./style.module.css"
-import { CheckBox } from "@mui/icons-material";
+import * as React from "react";
+import DayChecklist from "./InputComponents/DayChecklist";
+import DiningSelect from "./InputComponents/DiningSelect";
+import NutritionTextFields from "./InputComponents/NutritionTextFields";
+import FoodItem from "../../FoodItem";
 
 export default function CreateItemPage() {
-    const age = 12;
+    const [diningHall, setDiningHall] = React.useState('');
+    const [nutritionText, setNutritionText] = React.useState([]);
+    const [dayList, setDayList] = React.useState([]);
+
+    const submit = () => {
+        if (nutritionText[0] != undefined && dayList != [] && diningHall != '') {
+            const pushItem = new FoodItem(
+                nutritionText[0], 
+                nutritionText[1], 
+                nutritionText[2], 
+                nutritionText[3], 
+                nutritionText[4], 
+                nutritionText[5], 
+                nutritionText[6], 
+                nutritionText[7], 
+                nutritionText[8], 
+                dayList
+            );
+            console.log(pushItem);
+        }
+        else {
+            if (nutritionText[0] == undefined) {
+                alert("Invalid Nutrition Information");
+            } else if (dayList == []) {
+                alert("Please select a Day");
+            } else {
+                alert("Please select a Dining Hall");
+            }
+        }
+
+    }
 
     return (
         <>
@@ -14,120 +48,28 @@ export default function CreateItemPage() {
                     <Box className={s.header}>
                     <b>Creation Form</b>
                     </Box>      
-                    <Stack sx={{margin: "20px"}} 
+                    <Stack sx={{margin: "20px", justifyContent:"center"}} 
                     spacing={3}
                     divider={<Divider orientation="horizontal" flexItem />}
                     >
 
-                    <TextField
-                        required
-                        id="name"
-                        label="Item Name"
-                    />
+                    <NutritionTextFields onAllFilled={setNutritionText}/>
 
-                    <TextField
-                        required
-                        id="ss"
-                        label="Serving Size"
-                    />
+                    <DiningSelect onSelectChange={setDiningHall}/>            
 
-                    <Stack 
-                        direction={"row"}
-                        spacing={2}
-                        justifyContent={"center"}
-                    >
-                        <TextField
-                            id="cal"
-                            label="Calories"
-                            type="number"
-                            InputLabelProps={{
-                                shrink: true,
-                            }}
-                        />
-
-                        <TextField
-                            id="fg"
-                            label="Grams of Fat"
-                            type="number"
-                            InputLabelProps={{
-                                shrink: true,
-                            }}
-                        />
-
-                        <TextField
-                            id="smg"
-                            label="Milligrams of Sodium"
-                            type="number"
-                            InputLabelProps={{
-                                shrink: true,
-                            }}
-                        />
-                    </Stack>
-
-                    <Stack 
-                        direction={"row"}
-                        spacing={10}
-                        justifyContent={"center"}
-                    >
-                        <TextField
-                            id="cg"
-                            label="Grams of Carbs"
-                            type="number"
-                            InputLabelProps={{
-                                shrink: true,
-                            }}
-                        />
-
-                        <TextField
-                            id="sg"
-                            label="Grams of Sugar"
-                            type="number"
-                            InputLabelProps={{
-                                shrink: true,
-                            }}
-                        />
-                    </Stack>
-
-                    <Stack 
-                        direction={"row"}
-                        spacing={10}
-                        justifyContent={"center"}
-                    >
-                        <TextField
-                            id="pg"
-                            label="Grams of Protein"
-                            type="number"
-                            InputLabelProps={{
-                                shrink: true,
-                            }}
-                        />
-
-                        <TextField
-                            id="fig"
-                            label="Grams of Fiber"
-                            type="number"
-                            InputLabelProps={{
-                                shrink: true,
-                            }}
-                        />
-                    </Stack>
+                    <DayChecklist onCheckChange={setDayList}/>
                     
-                    <Select /*finish*/
-                        labelId="demo-simple-select-label"
-                        id="demo-simple-select"
-                        value={age}
-                        label="Age"
-                        onChange={() => {}}
-                    >
-                        <MenuItem value={10}>Ten</MenuItem>
-                        <MenuItem value={20}>Twenty</MenuItem>
-                        <MenuItem value={30}>Thirty</MenuItem>
-                    </Select>
-
-                    <CheckBox sx={{/*finish tmr*/}}></CheckBox>
-                    
-
-
+                    <FormControl fullWidth>
+                        <FormGroup sx={{justifyContent:"center"}}>
+                            <Button 
+                                className={s.submit}
+                                sx={{marginLeft:"43%"}}
+                                onClick={submit}
+                                >
+                                Submit
+                            </Button>
+                        </FormGroup>
+                    </FormControl>
 
                     </Stack>
                 </Box>
