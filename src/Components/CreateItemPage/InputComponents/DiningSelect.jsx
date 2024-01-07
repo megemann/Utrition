@@ -4,13 +4,17 @@ import DiningGrid from "../../HomePage/HomeComponents/DiningGrid/DiningGrid";
 
 
 
-export default function DiningSelect({onSelectChange}) {
+export default function DiningSelect({onSelectChange, submitted}) {
     const [diningHall, setDiningHall] = React.useState('');
 
     const handleSelectChange = (event) => {
         setDiningHall(event.target.value)
         onSelectChange(event.target.value);
     }
+
+    React.useEffect(() => {
+        setDiningHall((''));
+    }, [submitted]);
 
     return (
         <FormControl fullWidth>

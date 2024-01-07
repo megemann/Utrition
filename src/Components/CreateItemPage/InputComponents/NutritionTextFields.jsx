@@ -2,7 +2,7 @@ import {Stack, TextField, Divider} from "@mui/material"
 import * as React from "react";
 
 
-export default function NutritionTextFields({onAllFilled}) {
+export default function NutritionTextFields({onAllFilled, submitted}) {
 
     const [ss, setServingSize] = React.useState("");
     const [cal, setCalories] = React.useState(0);
@@ -57,6 +57,18 @@ export default function NutritionTextFields({onAllFilled}) {
             onAllFilled([]);
         }
     }, [name, ss, cal, fg, smg, cg, sg, pg, fig])
+
+    React.useEffect(() => {
+        setServingSize("");
+        setCalories(0);
+        setFatGrams(0);
+        setSodiumMilligrams(0);
+        setCarbGrams(0);
+        setSugarGrams(0);
+        setProteinGrams(0);
+        setFiberGrams(0);
+        setName("");
+    }, [submitted]);
 
     return (
         <Stack sx={{margin: "20px"}} 

@@ -13,6 +13,7 @@ export default function CreateItemPage() {
     const [nutritionText, setNutritionText] = React.useState([]);
     const [dayList, setDayList] = React.useState([]);
     const [item, setItem] = React.useState();
+    const [submitted, setSubmitted] = React.useState(false);
 
     const submit = () => {
         if (nutritionText[0] != undefined && dayList != [] && diningHall != '') {
@@ -46,6 +47,10 @@ export default function CreateItemPage() {
         try {
           const response = await FoodItemAPI.postItem(item, diningHall);
           console.log(response);
+          setNutritionText([]);
+          setDayList([]);
+          setDiningHall("");
+          setSubmitted(!submitted);
         } catch(err) {
           console.log(err);
         }
@@ -70,11 +75,11 @@ export default function CreateItemPage() {
                     divider={<Divider orientation="horizontal" flexItem />}
                     >
 
-                    <NutritionTextFields onAllFilled={setNutritionText}/>
+                    <NutritionTextFields onAllFilled={setNutritionText} submitted={submitted}/>
 
-                    <DiningSelect onSelectChange={setDiningHall}/>            
+                    <DiningSelect onSelectChange={setDiningHall} submitted={submitted}/>            
 
-                    <DayChecklist onCheckChange={setDayList}/>
+                    <DayChecklist onCheckChange={setDayList} submitted={submitted}/>
                     
                     <FormControl fullWidth>
                         <FormGroup sx={{justifyContent:"center"}}>

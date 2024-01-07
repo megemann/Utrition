@@ -2,7 +2,7 @@ import {FormGroup, FormLabel, FormControlLabel, FormControl, Checkbox} from "@mu
 import * as React from "react";
 
 
-export default function DayChecklist({onCheckChange}) {
+export default function DayChecklist({onCheckChange, submitted}) {
 
     const [sundayChecked, setSundayChecked] = React.useState(false);
     const [mondayChecked, setMondayChecked] = React.useState(false);
@@ -67,8 +67,17 @@ export default function DayChecklist({onCheckChange}) {
             dayList.push("Saturday");
         }
         onCheckChange(dayList);
-    }, [sundayChecked, mondayChecked, tuesdayChecked, wednesdayChecked, thursdayChecked, fridayChecked, saturdayChecked])
+    }, [sundayChecked, mondayChecked, tuesdayChecked, wednesdayChecked, thursdayChecked, fridayChecked, saturdayChecked]);
 
+    React.useEffect(() => {
+        setSundayChecked(false);
+        setMondayChecked(false);
+        setTuesdayChecked(false);
+        setWednesdayChecked(false);
+        setThursdayChecked(false);
+        setFridayChecked(false);
+        setSaturdayChecked(false);
+    }, [submitted]);
 
 
 
