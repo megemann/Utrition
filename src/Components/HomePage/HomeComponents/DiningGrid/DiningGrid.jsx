@@ -11,23 +11,27 @@ const simpleStyles = {
 }
 
 
-export default function DiningGrid() {
+export default function DiningGrid({diningSet}) {
 
     const navigate = useNavigate();
 
     const navigateWoo = () => {
+        diningSet("Worcester");
         navigate("/Worcester");
     }
 
     const navigateBerk = () => {
+        diningSet("Berkshire")
         navigate("/Berkshire");
     }
 
     const navigateFrank = () => {
+        diningSet("Franklin")
         navigate("/Franklin");
     }
 
     const navigateHamp = () => {
+        diningSet("Hampshire");
         navigate("/Hampshire");
     }
 

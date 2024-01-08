@@ -31,12 +31,11 @@ export default function NavDrawer(){
         <BrowserRouter>
         <div>
             <Routes>
-                <Route path={"/"} element={<HomePage/>}/>
-                <Route path={"/nav"} element={<HomePage/>}/>
-                <Route path={"/Worcester"} element={<DiningHallPage hallName={"Worcester"}/>}/>
-                <Route path={"/Franklin"} element={<DiningHallPage hallName={"Franklin"}/>}/>
-                <Route path={"/Hampshire"} element={<DiningHallPage hallName={"Hampshire"}/>}/>
-                <Route path={"/Berkshire"} element={<DiningHallPage hallName={"Berkshire"}/>}/>
+                <Route path={"/"} element={<HomePage diningHallSet={setDiningHall}/>}/>
+                <Route path={"/Worcester"} element={<DiningHallPage hallName={"Worcester"} items={items} />}/>
+                <Route path={"/Franklin"} element={<DiningHallPage hallName={"Franklin"} items={items}/>}/>
+                <Route path={"/Hampshire"} element={<DiningHallPage hallName={"Hampshire"} items={items}/>}/>
+                <Route path={"/Berkshire"} element={<DiningHallPage hallName={"Berkshire"} items={items}/>}/>
                 <Route path={"/CreateItem"} element={<CreateItemPage itemsList={items} onDiningChange={setDiningHall}/>}/>
             </Routes>
         </div>

@@ -12,6 +12,11 @@ export default function MenuHome({handleClick, open, handleClose, anchorEl}) {
         handleClose();
     }
 
+    const navigateHome = () => {
+        navigate("/");
+        handleClose();
+    }
+
 
     return (
         <>
@@ -39,6 +44,7 @@ export default function MenuHome({handleClick, open, handleClose, anchorEl}) {
                 <MenuItem onClick={handleClose}>My account</MenuItem>
                 <MenuItem onClick={handleClose}>Logout</MenuItem>
                 <MenuItem onClick={navigateCreateItem}>Create Item</MenuItem>
+                <MenuItem onClick={navigateHome}>Home</MenuItem>
             </Menu>
         </>
     );

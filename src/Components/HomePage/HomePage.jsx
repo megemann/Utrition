@@ -6,9 +6,13 @@ import DiningGrid from "./HomeComponents/DiningGrid/DiningGrid";
 import TopAppBar from "../TopAppBar/TopAppBar";
 
  
-export default function HomePage() {
+export default function HomePage({diningHallSet}) {
     const [modalOpen, setModalOpen] = React.useState(true);
     const closeModal = () => setModalOpen(false);
+
+    const setDining = (diningHall) => {
+        diningHallSet(diningHall);
+    }
 
     return (
         <div style={{padding:"0px"}}>
@@ -18,7 +22,7 @@ export default function HomePage() {
             />
             <TopAppBar/>
             <div className={s.background}>
-                <DiningGrid/>
+                <DiningGrid diningSet={setDining}/>
             </div>
         </div>
     );
