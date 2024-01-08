@@ -45,7 +45,7 @@ const style = {
     }
   };
 
-export default function EndingModal({modalOpen, closeModal, name}) {
+export default function EndingModal({modalOpen, closeModal, name, posted}) {
 
     const navigate = useNavigate();
 

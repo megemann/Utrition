@@ -2,9 +2,31 @@ import { BrowserRouter, Link, Routes, Route } from "react-router-dom"; //for rou
 import HomePage from "../HomePage/HomePage";
 import DiningHallPage from "../DiningHallPage/DiningHallPage";
 import CreateItemPage from "../CreateItemPage/CreateItemPage";
+import FoodItemAPI from "../../api/itemAPI";
+import * as React from  "react";
 
 
 export default function NavDrawer(){
+
+    const [items, setItems] = React.useState([]);
+    const [diningHall, setDiningHall] = React.useState("");
+ 
+    const fetchItems = async (diningHall: any) =>{
+        try
+        {
+          setItems(await FoodItemAPI.fetchItems(diningHall));
+          console.log(items);
+        } 
+        catch(err)
+        {console.log(err);}
+    };
+
+    React.useEffect(() => {
+        if (diningHall != "") {
+            fetchItems(diningHall);
+        }
+    },[diningHall]);
+
     return (
         <BrowserRouter>
         <div>
@@ -15,7 +37,7 @@ export default function NavDrawer(){
                 <Route path={"/Franklin"} element={<DiningHallPage hallName={"Franklin"}/>}/>
                 <Route path={"/Hampshire"} element={<DiningHallPage hallName={"Hampshire"}/>}/>
                 <Route path={"/Berkshire"} element={<DiningHallPage hallName={"Berkshire"}/>}/>
-                <Route path={"/CreateItem"} element={<CreateItemPage/>}/>
+                <Route path={"/CreateItem"} element={<CreateItemPage itemsList={items} onDiningChange={setDiningHall}/>}/>
             </Routes>
         </div>
         </BrowserRouter>

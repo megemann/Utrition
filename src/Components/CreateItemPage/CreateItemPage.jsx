@@ -9,7 +9,7 @@ import FoodItem from "../../FoodItem";
 import FoodItemAPI from "../../api/itemAPI";
 import EndingModal from "./CreateItemComponents/EndingModal";
 
-export default function CreateItemPage() {
+export default function CreateItemPage({itemsList, onDiningChange}) {
     const [diningHall, setDiningHall] = React.useState('');
     const [nutritionText, setNutritionText] = React.useState([]);
     const [dayList, setDayList] = React.useState([]);
@@ -21,32 +21,45 @@ export default function CreateItemPage() {
     const closeModal = () => setModalOpen(false);
 
     const submit = () => {
-        if (nutritionText[0] != undefined && dayList != [] && diningHall != '') {
-            const pushItem = new FoodItem(
-                nutritionText[0], 
-                nutritionText[1], 
-                nutritionText[2], 
-                nutritionText[3], 
-                nutritionText[4], 
-                nutritionText[5], 
-                nutritionText[6], 
-                nutritionText[7], 
-                nutritionText[8], 
-                dayList
-            );
-            console.log(pushItem);
-            setItem(pushItem);
+
+        let same = false;
+        let loop = 0;
+        while (!same && loop < itemsList.length) {
+            same = (itemsList[loop]?.name == name)
+            loop += 1;
         }
-        else {
-            if (nutritionText[0] == undefined) {
-                alert("Invalid Nutrition Information");
-            } else if (dayList == []) {
-                alert("Please select a Day");
-            } else {
-                alert("Please select a Dining Hall");
+
+        if (same) {
+            alert("Item Already Exists"); //later add support for adding days, need to learn mongodb update
+        } else {
+            if (nutritionText[0] != undefined && dayList != [] && diningHall != '') {
+                const pushItem = new FoodItem(
+                    nutritionText[0], 
+                    nutritionText[1], 
+                    nutritionText[2], 
+                    nutritionText[3], 
+                    nutritionText[4], 
+                    nutritionText[5], 
+                    nutritionText[6], 
+                    nutritionText[7], 
+                    nutritionText[8], 
+                    dayList
+                );
+                console.log(pushItem);
+                setItem(pushItem);
+            }
+            else {
+                if (nutritionText[0] == undefined) {
+                    alert("Invalid Nutrition Information");
+                } else if (dayList == []) {
+                    alert("Please select a Day");
+                } else {
+                    alert("Please select a Dining Hall");
+                }
             }
         }
-    }
+        }
+
 
     const postItem = async item => {
         try {
@@ -68,6 +81,10 @@ export default function CreateItemPage() {
           postItem(item.state);
         }
       }, [item]);
+
+    React.useEffect(() => {
+        onDiningChange(diningHall);
+    }, [diningHall]);
 
     return (
         <>
