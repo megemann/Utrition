@@ -20,7 +20,7 @@ export default function HomePage({diningHallSet}) {
                 modalOpen={modalOpen}
                 closeModal={closeModal}
             />
-            <TopAppBar/>
+            <TopAppBar diningHall={""}/>
             <div className={s.background}>
                 <DiningGrid diningSet={setDining}/>
             </div>

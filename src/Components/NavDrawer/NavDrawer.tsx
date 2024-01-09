@@ -14,8 +14,9 @@ export default function NavDrawer(){
     const fetchItems = async (diningHall: any) =>{
         try
         {
-          setItems(await FoodItemAPI.fetchItems(diningHall));
-          console.log(items);
+            setItems([]);
+            setItems(await FoodItemAPI.fetchItems(diningHall));
+            console.log(items);
         } 
         catch(err)
         {console.log(err);}
@@ -24,6 +25,8 @@ export default function NavDrawer(){
     React.useEffect(() => {
         if (diningHall != "") {
             fetchItems(diningHall);
+        } else {
+            setItems([]);
         }
     },[diningHall]);
 
@@ -37,6 +40,7 @@ export default function NavDrawer(){
                 <Route path={"/Hampshire"} element={<DiningHallPage hallName={"Hampshire"} items={items}/>}/>
                 <Route path={"/Berkshire"} element={<DiningHallPage hallName={"Berkshire"} items={items}/>}/>
                 <Route path={"/CreateItem"} element={<CreateItemPage itemsList={items} onDiningChange={setDiningHall}/>}/>
+                <Route path={"/item/"}
             </Routes>
         </div>
         </BrowserRouter>

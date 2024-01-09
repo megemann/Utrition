@@ -88,7 +88,7 @@ export default function CreateItemPage({itemsList, onDiningChange}) {
 
     return (
         <>
-            <TopAppBar/>
+            <TopAppBar diningHall={""}/>
             <EndingModal closeModal={closeModal} modalOpen={modalOpen} name={name}/>
             <div className={s.background}>
                 <Box className={s.form} justifyContent={"center"}>
