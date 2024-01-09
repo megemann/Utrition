@@ -2,6 +2,8 @@ import { Typography, Box, Stack } from "@mui/material";
 import TopAppBar from "../TopAppBar/TopAppBar";
 import s from "./style.module.css"
 import ItemTable from "./DiningHallPageComponents/ItemTable";
+import FilterChecklist from "./DiningHallPageComponents/FilterChecklist";
+import * as React from "react";
 
 const styles = {
     itembox: {
@@ -15,6 +17,9 @@ const styles = {
 }
 
 export default function DiningHallPage({hallName, items}) {
+
+    const [tableHeaders, setTableHeaders] = React.useState([]);
+
     return (
         <>
             <TopAppBar/>
@@ -24,10 +29,8 @@ export default function DiningHallPage({hallName, items}) {
                 </Box>
                 <Box sx={styles.itembox}>
                         <Stack direction={"row"}>
-                            <ItemTable items={items}/>
-                        <Box sx={{mr: "2%", width:"28%",backgroundColor:"black"}}>
-                            cont
-                        </Box>
+                            <ItemTable items={items} headers={tableHeaders}/>
+                            <FilterChecklist onCheckChange={setTableHeaders} submitted={false}></FilterChecklist>
                     </Stack>
 
                 </Box>
