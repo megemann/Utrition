@@ -11,6 +11,7 @@ import CartPage from "../CartPage/Cart";
 
 export default function NavDrawer(){
 
+    const [modalClosed, setModalClosed] = React.useState(false);
     const [cartItems, setCartItems] = React.useState([]);
     const [items, setItems] = React.useState([]);
     const [diningHall, setDiningHall] = React.useState("");
@@ -50,7 +51,7 @@ export default function NavDrawer(){
         <BrowserRouter>
         <div>
             <Routes>
-                <Route path={"/"} element={<HomePage diningHallSet={setDiningHall} setNavItem={setNavItem}/>}/>
+                <Route path={"/"} element={<HomePage diningHallSet={setDiningHall} setNavItem={setNavItem} modalClosed={modalClosed} setModalClosed={setModalClosed}/>}/>
                 <Route path={"/Worcester"} element={<DiningHallPage hallName={"Worcester"} items={items} setNavItem={setNavItem}/>}/>
                 <Route path={"/Franklin"} element={<DiningHallPage hallName={"Franklin"} items={items} setNavItem={setNavItem} />}/>
                 <Route path={"/Hampshire"} element={<DiningHallPage hallName={"Hampshire"} items={items} setNavItem={setNavItem} />}/>

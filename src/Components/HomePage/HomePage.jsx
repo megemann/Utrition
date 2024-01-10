@@ -6,9 +6,8 @@ import DiningGrid from "./HomeComponents/DiningGrid/DiningGrid";
 import TopAppBar from "../TopAppBar/TopAppBar";
 
  
-export default function HomePage({diningHallSet, setNavItem}) {
-    const [modalOpen, setModalOpen] = React.useState(true);
-    const closeModal = () => setModalOpen(false);
+export default function HomePage({diningHallSet, setNavItem, modalClosed, setModalClosed}) {
+    const closeModal = () => setModalClosed(true);
 
     const setDining = (diningHall) => {
         diningHallSet(diningHall);
@@ -17,7 +16,7 @@ export default function HomePage({diningHallSet, setNavItem}) {
     return (
         <div style={{padding:"0px"}}>
             <StartingModal
-                modalOpen={modalOpen}
+                modalOpen={!modalClosed}
                 closeModal={closeModal}
             />
             <TopAppBar diningHall={""} setNavItem={setNavItem}/>
