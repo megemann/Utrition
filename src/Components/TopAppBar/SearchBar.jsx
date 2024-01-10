@@ -1,15 +1,14 @@
 import { Input, Box, Stack, Divider, Button, Hidden } from "@mui/material";
+import { getSuggestedQuery } from "@testing-library/react";
 import * as React from "react";
 import { BrowserRouter, Link, Routes, Route } from "react-router-dom"; //for routing to new webpages
 import { useNavigate } from "react-router-dom";
 
-export default function SearchBar({items, onFocused}) {
+export default function SearchBar({items, onFocused, setItem}) {
 
     const navigate = useNavigate();
 
     const [suggestionList, setSuggestionList] = React.useState([]);
-    const [itemId, setItemId] = React.useState("");
-    const [navItem, setNavItem] = React.useState("");
     const [overflowY, setOverflowY] = React.useState("visible");
     const [maxHeight, setMaxHeight] = React.useState("25px")
     const [searchVal, setSearchVal] = React.useState("");
@@ -22,13 +21,18 @@ export default function SearchBar({items, onFocused}) {
         onFocused(true);
     }
 
-    
-
-    React.useEffect(() => {
-        if (itemId !== "") {
-            console.log(itemId);
+    const onClickButton = (event) => {
+        let done = false;
+        let loop = 0;
+        while (!done) {
+            if (suggestionList[loop].id.timestamp == event.target.id) {
+                setItem(suggestionList[loop]);
+                done = true;
+            }
+            loop++;
         }
-    }, [itemId]);
+        navigate("/item");
+    }
 
     const style = {
         box:{
@@ -92,7 +96,7 @@ export default function SearchBar({items, onFocused}) {
                         suggestionList.map((item) => {
                             console.log(item.name + ": " + item.id.timestamp)
                             return( 
-                                <Button id={item.id.timestamp} sx={{height: "30px"}} onClick={setItemId(item.id.timestamp)}>
+                                <Button id={item.id.timestamp} sx={{height: "30px"}} onClick={onClickButton}>
                                     {item.name}
                                 </Button> 
                             )

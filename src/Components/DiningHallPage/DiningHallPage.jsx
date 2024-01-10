@@ -17,7 +17,7 @@ const styles = {
     }
 }
 
-export default function DiningHallPage({hallName, items}) {
+export default function DiningHallPage({hallName, items, setNavItem}) {
 
     const navigate = useNavigate();
 
@@ -27,9 +27,14 @@ export default function DiningHallPage({hallName, items}) {
 
     const [tableHeaders, setTableHeaders] = React.useState([]);
 
+
+    const setItem = (item) => {
+        setNavItem(item);
+    }
+
     return (
         <>
-            <TopAppBar diningHall={hallName}/>
+            <TopAppBar diningHall={hallName} setNavItem={setItem}/>
             <div className={s.background}>
                 <Box className={s.header}>
                     {hallName}

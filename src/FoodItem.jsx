@@ -14,7 +14,8 @@ class FoodItem extends Component{
            fig:fig,
            name:name,
            daysServed:daysServed 
-        }
+        };
+        this.name = name;
     }
 }
 

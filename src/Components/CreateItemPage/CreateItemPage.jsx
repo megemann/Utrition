@@ -9,7 +9,7 @@ import FoodItem from "../../FoodItem";
 import FoodItemAPI from "../../api/itemAPI";
 import EndingModal from "./CreateItemComponents/EndingModal";
 
-export default function CreateItemPage({itemsList, onDiningChange}) {
+export default function CreateItemPage({itemsList, onDiningChange, setNavItem}) {
     const [diningHall, setDiningHall] = React.useState('');
     const [nutritionText, setNutritionText] = React.useState([]);
     const [dayList, setDayList] = React.useState([]);
@@ -86,9 +86,13 @@ export default function CreateItemPage({itemsList, onDiningChange}) {
         onDiningChange(diningHall);
     }, [diningHall]);
 
+    const setNavvItem = (item) => {
+        setNavItem(item);
+    }
+
     return (
         <>
-            <TopAppBar diningHall={""}/>
+            <TopAppBar diningHall={""} setNavItem={setNavvItem}/>
             <EndingModal closeModal={closeModal} modalOpen={modalOpen} name={name}/>
             <div className={s.background}>
                 <Box className={s.form} justifyContent={"center"}>

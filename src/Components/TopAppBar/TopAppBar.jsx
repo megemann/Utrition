@@ -5,14 +5,16 @@ import s from "./style.module.css";
 import SearchBar from "./SearchBar";
 import FoodItemAPI from "../../api/itemAPI";
 
-export default function TopAppBar({diningHall}) {
+export default function TopAppBar({diningHall, setNavItem}) {
     const [items, setItems] = React.useState([]);
     const [focused, setFocused] = React.useState(false);
     const [anchorEl, setAnchorEl] = React.useState(null);
 
     const menuOpen = Boolean(anchorEl);
 
-
+    const setItem = (item) => {
+        setNavItem(item);
+    }
 
     const handleMenuClick = (event) => {
       setAnchorEl(event.currentTarget);
@@ -62,7 +64,7 @@ export default function TopAppBar({diningHall}) {
                     <Typography className={s.appHeader} variant="h2">
                         <b>U</b>trition
                     </Typography>
-                    <SearchBar items={items} onFocused={setFocused}/>
+                    <SearchBar items={items} onFocused={setFocused} setItem={setItem}/>
                     <img
                         className={s.seal}
                         src="/UmassSeal.png"
