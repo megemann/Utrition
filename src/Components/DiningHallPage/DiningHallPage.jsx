@@ -27,14 +27,9 @@ export default function DiningHallPage({hallName, items, setNavItem}) {
 
     const [tableHeaders, setTableHeaders] = React.useState([]);
 
-
-    const setItem = (item) => {
-        setNavItem(item);
-    }
-
     return (
         <>
-            <TopAppBar diningHall={hallName} setNavItem={setItem}/>
+            <TopAppBar diningHall={hallName} setNavItem={setNavItem}/>
             <div className={s.background}>
                 <Box className={s.header}>
                     {hallName}

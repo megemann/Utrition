@@ -12,10 +12,6 @@ export default function TopAppBar({diningHall, setNavItem}) {
 
     const menuOpen = Boolean(anchorEl);
 
-    const setItem = (item) => {
-        setNavItem(item);
-    }
-
     const handleMenuClick = (event) => {
       setAnchorEl(event.currentTarget);
     };
@@ -64,7 +60,7 @@ export default function TopAppBar({diningHall, setNavItem}) {
                     <Typography className={s.appHeader} variant="h2">
                         <b>U</b>trition
                     </Typography>
-                    <SearchBar items={items} onFocused={setFocused} setItem={setItem}/>
+                    <SearchBar items={items} onFocused={setFocused} setItem={setNavItem}/>
                     <img
                         className={s.seal}
                         src="/UmassSeal.png"

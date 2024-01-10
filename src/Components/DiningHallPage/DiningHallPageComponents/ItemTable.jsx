@@ -166,7 +166,10 @@ export default function ItemTable({items, headers}) {
                                                 }                
                                             }
                                         })
-                                    }
+                                    } 
+                                    <Button>
+                                        Add
+                                    </Button>
                                 </TableRow>
                             )
                         })

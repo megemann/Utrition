@@ -14,16 +14,13 @@ export default function HomePage({diningHallSet, setNavItem}) {
         diningHallSet(diningHall);
     }
 
-    const setItem = (item) => {
-        setNavItem(item);
-    }
     return (
         <div style={{padding:"0px"}}>
             <StartingModal
                 modalOpen={modalOpen}
                 closeModal={closeModal}
             />
-            <TopAppBar diningHall={""} setNavItem={setItem}/>
+            <TopAppBar diningHall={""} setNavItem={setNavItem}/>
             <div className={s.background}>
                 <DiningGrid diningSet={setDining}/>
             </div>

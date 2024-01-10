@@ -86,13 +86,9 @@ export default function CreateItemPage({itemsList, onDiningChange, setNavItem}) 
         onDiningChange(diningHall);
     }, [diningHall]);
 
-    const setNavvItem = (item) => {
-        setNavItem(item);
-    }
-
     return (
         <>
-            <TopAppBar diningHall={""} setNavItem={setNavvItem}/>
+            <TopAppBar diningHall={""} setNavItem={setNavItem}/>
             <EndingModal closeModal={closeModal} modalOpen={modalOpen} name={name}/>
             <div className={s.background}>
                 <Box className={s.form} justifyContent={"center"}>

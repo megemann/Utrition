@@ -3,6 +3,8 @@ import { getSuggestedQuery } from "@testing-library/react";
 import * as React from "react";
 import { BrowserRouter, Link, Routes, Route } from "react-router-dom"; //for routing to new webpages
 import { useNavigate } from "react-router-dom";
+import SearchRoundedIcon from '@mui/icons-material/SearchRounded';
+
 
 export default function SearchBar({items, onFocused, setItem}) {
 
@@ -22,6 +24,7 @@ export default function SearchBar({items, onFocused, setItem}) {
     }
 
     const onClickButton = (event) => {
+        setSearchVal("");
         let done = false;
         let loop = 0;
         while (!done) {
@@ -49,7 +52,7 @@ export default function SearchBar({items, onFocused, setItem}) {
             boxShadow: "inset 0 0 10px rgba(0, 0, 0, 0.3)"
         },
         input:{
-            ml: "10px",
+            ml: "5px",
             mr: "10px",
             width: "380px"
         }
@@ -80,14 +83,19 @@ export default function SearchBar({items, onFocused, setItem}) {
 
     return (
         <Box sx={style.box}>
-            <Input 
-                size={"small"} 
-                sx={style.input} 
-                disableUnderline 
-                value={searchVal} 
-                onChange={handleSearchChange} 
-                onFocus={handleFocused}
-            />
+                <Stack direction={"row"}>
+                    <SearchRoundedIcon sx={{filter: "invert(1)", mt:"1px"}}/>
+                        <Input 
+                            size={"small"} 
+                            sx={style.input} 
+                            disableUnderline 
+                            value={searchVal} 
+                            onChange={handleSearchChange} 
+                            onFocus={handleFocused}
+                        />
+                </Stack>
+                    
+                
             <Stack 
                 sx={{margin: "20px", justifyContent:"center"}} 
                 spacing={3}
