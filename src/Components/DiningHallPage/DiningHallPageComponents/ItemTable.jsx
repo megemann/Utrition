@@ -1,12 +1,15 @@
 import { FlashOffRounded } from "@mui/icons-material";
-import { Box, TableContainer, TableHead, TableRow, TableCell, TableBody, Table, TablePagination } from "@mui/material";
+import { Box, TableContainer, TableHead, TableRow, TableCell, TableBody, Table, TablePagination, Button } from "@mui/material";
 import * as React from "react";
+import { useNavigate } from "react-router-dom";
 
 const Today = new Date();
 
 
 
-export default function ItemTable({items, headers}) {
+export default function ItemTable({items, headers, setNavItem}) {
+
+    const navigate = useNavigate();
 
     var days = ['Sunday','Monday','Tuesday','Wednesday','Thursday','Friday','Saturday'];
     var day = days[ Today.getDay() ];
@@ -49,6 +52,19 @@ export default function ItemTable({items, headers}) {
     }
     
       
+    const onClickButton = (event) => {
+        let done = false;
+        let loop = 0;
+        while (!done) {
+            if (visibleRows[loop].id.timestamp == event.target.id) {
+                setNavItem(visibleRows[loop]);
+                done = true;
+            }
+            loop++;
+        }
+        navigate("/item");
+    }
+
         
     React.useEffect(() => {
         if (showOnlyToday) {
@@ -140,6 +156,7 @@ export default function ItemTable({items, headers}) {
                                         );
                             }    
                         })}
+                        <TableCell sx={{color:"white"}}>Cart</TableCell>
                     </TableRow>
                 </TableHead>
                 <TableBody sx={{overflow:"scroll"}}>
@@ -167,8 +184,8 @@ export default function ItemTable({items, headers}) {
                                             }
                                         })
                                     } 
-                                    <Button>
-                                        Add
+                                    <Button id={item.id.timestamp} sx={{mt:"8px", color: "rgb(134,15,31)", backgroundColor: "rgba(0,0,0,0.3)"}} onClick={onClickButton}>
+                                        View
                                     </Button>
                                 </TableRow>
                             )

@@ -11,7 +11,7 @@ import CartPage from "../CartPage/Cart";
 
 export default function NavDrawer(){
 
-    const [cartItems, setCartItems] = React.useState();
+    const [cartItems, setCartItems] = React.useState([]);
     const [items, setItems] = React.useState([]);
     const [diningHall, setDiningHall] = React.useState("");
     const [navItem, setNavItem] = React.useState(new FoodItem(

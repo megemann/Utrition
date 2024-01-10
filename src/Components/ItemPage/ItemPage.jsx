@@ -2,11 +2,9 @@ import { Box, Stack, Typography, Divider, Button} from "@mui/material";
 import TopAppBar from "../TopAppBar/TopAppBar"
 import s from "./style.module.css"
 import * as React from "react";
+import EndingModal from "./ItemPageComponents/EndingModal";
 
 export default function ItemPage({item, setNavItem, cartItems, setCartItems}) {
-    const setTheItem = (navItem) => {
-        setNavItem(navItem);
-    };
 
     let daysString;
     if (item?.daysServed?.length > 0) {
@@ -16,11 +14,21 @@ export default function ItemPage({item, setNavItem, cartItems, setCartItems}) {
         }
     }
 
+    const onCartClick = () => {
+        let list = cartItems;
+        list.push(item);
+        setCartItems(list);
+        console.log(list);
+        setModalOpen(true);
+    }
+
+
+    const [modalOpen, setModalOpen] = React.useState(false);
 
     
     return (
         <div>
-            <TopAppBar diningHall={""} setNavItem={setTheItem}/>
+            <TopAppBar diningHall={""} setNavItem={setNavItem}/>
             <div className={s.background}>
                 <Box className={s.box}>
                     <Stack sx={{mt: "30px", justifyContent:"center"}}
@@ -57,11 +65,12 @@ export default function ItemPage({item, setNavItem, cartItems, setCartItems}) {
                         <Typography className={s.typo} >
                             Days Served: {daysString}
                         </Typography>
-                        <Button>
+                        <Button onClick={onCartClick}>
                             Add to Shopping
                         </Button>
                     </Stack>
                 </Box>
+                <EndingModal modalOpen={modalOpen} name={item.name}/>
             </div>
         </div>
 

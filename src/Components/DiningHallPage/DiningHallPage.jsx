@@ -39,7 +39,7 @@ export default function DiningHallPage({hallName, items, setNavItem}) {
                 </Button>
                 <Box sx={styles.itembox}>
                         <Stack direction={"row"}>
-                            <ItemTable items={items} headers={tableHeaders}/>
+                            <ItemTable items={items} headers={tableHeaders} setNavItem={setNavItem}/>
                             <FilterChecklist onCheckChange={setTableHeaders} submitted={false}></FilterChecklist>
                     </Stack>
 
