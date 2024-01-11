@@ -58,7 +58,7 @@ export default function NavDrawer(){
                 <Route path={"/Berkshire"} element={<DiningHallPage hallName={"Berkshire"} items={items} setNavItem={setNavItem} />}/>
                 <Route path={"/CreateItem"} element={<CreateItemPage itemsList={items} onDiningChange={setDiningHall} setNavItem={setNavItem} />}/>
                 <Route path={"/item"} element={<ItemPage item={navItem} setNavItem={setNavItem} cartItems={cartItems} setCartItems={setCartItems}/>}/>
-                <Route path={"/cart"} element={<CartPage itemCart={cartItems} setNavItem={setNavItem}/>}/>
+                <Route path={"/cart"} element={<CartPage itemCart={cartItems} setNavItem={setNavItem} setItemCart={setCartItems}/>}/>
             </Routes>
         </div>
         </BrowserRouter>
