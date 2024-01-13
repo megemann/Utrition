@@ -20,20 +20,22 @@ export default function MenuList({menus, setCurrentMenu}) {
         for (let i = 0; i < menus.length; i++) {
             if (menus[i].id.timestamp == event.target.id) {
                 setCurrentMenu(menus[i]);
+                console.log(menus[i]);
             }
         }
     }
 
     return (
         <Box sx={styles.container}>
-            <Stack>
+            <Stack
+                sx={{mt: "10px"}}
+                spacing={1}
+                divider={<Divider orientation="horizontal" flexItem />}>
                 {
                     menus.map((menu) => {
                         return (
                             <Box>
-                                <Stack direction={"row"}
-                                spacing={3}
-                                divider={<Divider orientation="horizontal" flexItem sx={{backgroundColor:"black"}} />}>
+                                <Stack direction={"row"}>
                                     <Box sx={{width:"95%"}}>
                                     <Typography sx={{left:"0"}}>
                                         Items: 

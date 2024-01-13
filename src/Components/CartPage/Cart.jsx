@@ -158,12 +158,18 @@ export default function CartPage({itemCart, setNavItem, setItemCart}) {
       }, [menu]);
 
     const submitMenu = () => {
-        let newTotal = [];
-        for (let i = 2; i < totalList.length; i++) {
-            newTotal.push(parseFloat(totalList[i]));
+        if (newItemCart.length > 0) {
+            let newTotal = [];
+            for (let i = 2; i < totalList.length; i++) {
+                newTotal.push(parseFloat(totalList[i]));
+            }
+            setMenu(new Menu(newItemCart, "", newTotal));
+            setModalOpen(true);
+            setItemCart([]);
+        } else {
+            alert("Cart is empty! please fill.")
         }
-        setMenu(new Menu(newItemCart, "", newTotal));
-        setModalOpen(true);
+
     }
 
     const [modalOpen, setModalOpen] = React.useState(false);
