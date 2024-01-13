@@ -17,6 +17,20 @@ class FoodItemAPI {
         return response.data;
     }
 
+    static async fetchMenus() {
+        const response = await axios.get(`${BASE_ROOT}/api/Menus`);
+        console.log(response.data);
+        return response.data;
+    }
+
+    static async postMenu(menu) {
+        const response = await axios.post(`${BASE_ROOT}/api/Menus`, menu);
+        console.log("posted", menu);
+        return response.data;
+    }
+
+
+
     static async fetchAllItems() {
         const response1 = await axios.get(`${BASE_ROOT}/api/Worcester`);
         const response2 = await axios.get(`${BASE_ROOT}/api/Berkshire`);

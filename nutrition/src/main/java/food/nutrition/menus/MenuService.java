@@ -21,7 +21,7 @@ public class MenuService {
 
     public Menu addMenu(Menu newMenu) {
 
-        Menu menu = new Menu(newMenu.getItemList(), newMenu.getUsername());
+        Menu menu = new Menu(newMenu.getItemList(), newMenu.getUsername(), newMenu.getTotalList());
 
         Menu savedMenu = repository.save(menu);
 

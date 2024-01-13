@@ -25,21 +25,28 @@ public class Menu {
         return id;
     }
 
-    private List<Item> itemList; //serving size
+    private List<Item> itemList;
 
     public List<Item> getItemList() {
         return itemList;
     }
 
-    private String username; //calories
+    private String username;
 
     public String getUsername() {
         return username;
     }
 
-    public Menu(List<Item> itemList, String username) {
+    private List<Float> totalList;
+
+    public List<Float> getTotalList() {
+        return totalList;
+    }
+
+    public Menu(List<Item> itemList, String username, List<Float> totalList) {
         this.itemList = itemList;
         this.username = username;
+        this.totalList = totalList;
     }
 }
 

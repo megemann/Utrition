@@ -7,6 +7,7 @@ import * as React from  "react";
 import FoodItem from "../../FoodItem";
 import ItemPage from "../ItemPage/ItemPage";
 import CartPage from "../CartPage/Cart";
+import MenuPage from "../MenuPage/MenuPage";
 
 
 export default function NavDrawer(){
@@ -59,6 +60,7 @@ export default function NavDrawer(){
                 <Route path={"/CreateItem"} element={<CreateItemPage itemsList={items} onDiningChange={setDiningHall} setNavItem={setNavItem} />}/>
                 <Route path={"/item"} element={<ItemPage item={navItem} setNavItem={setNavItem} cartItems={cartItems} setCartItems={setCartItems}/>}/>
                 <Route path={"/cart"} element={<CartPage itemCart={cartItems} setNavItem={setNavItem} setItemCart={setCartItems}/>}/>
+                <Route path={"/menus"} element={<MenuPage setNavItem={setNavItem}/>}/>
             </Routes>
         </div>
         </BrowserRouter>

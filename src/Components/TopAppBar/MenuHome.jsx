@@ -22,6 +22,11 @@ export default function MenuHome({handleClick, open, handleClose, anchorEl}) {
         handleClose();
     }
 
+    const navigateMenus = () => {
+        navigate("/menus");
+        handleClose();
+    }
+
     return (
         <>
             <IconButton
@@ -50,6 +55,7 @@ export default function MenuHome({handleClick, open, handleClose, anchorEl}) {
                 <MenuItem onClick={navigateCreateItem}>Create Item</MenuItem>
                 <MenuItem onClick={navigateHome}>Home</MenuItem>
                 <MenuItem onClick={navigateCart}>Cart</MenuItem>
+                <MenuItem onClick={navigateMenus}>Menus</MenuItem>
             </Menu>
         </>
     );

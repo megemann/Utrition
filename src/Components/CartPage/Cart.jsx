@@ -2,18 +2,22 @@ import TopAppBar from "../TopAppBar/TopAppBar";
 import s from "./style.module.css";
 import { Box, Stack, TableContainer, Table, TableHead, TableRow, TableCell, TableBody, Button } from "@mui/material";
 import * as React from "react";
+import FoodItemAPI from "../../api/itemAPI";
+import Menu from "../../Menu";
+import EndingModal from "./CartComponents/EndingModal";
+
 const ADD = 1;
 const SUB = 0;
+
 
 
 export default function CartPage({itemCart, setNavItem, setItemCart}) {
 
     /*
     Whats left:
-        
-        add meal support
         add meal viewing page
-        add meal api
+
+        export table to a different document here
 
         add login support
         add user ids
@@ -28,6 +32,7 @@ export default function CartPage({itemCart, setNavItem, setItemCart}) {
     const [totalList, setTotalList] = React.useState([]);
     const [newItemCart, setNewItemCart] = React.useState([]);
     const [servingsList, setServingsList] = React.useState([]);
+    const [menu, setMenu] = React.useState();
 
     const [savedDate, setSavedDate] = React.useState([]);
 
@@ -131,99 +136,136 @@ export default function CartPage({itemCart, setNavItem, setItemCart}) {
         
     }, [newItemCart]);
 
+    const postMenu = async menu => {
+        try {
+          const response = await FoodItemAPI.postMenu(menu);
+          console.log(response);
+        //   setName(item.name);
+        //   setNutritionText([]);
+        //   setDayList([]);
+        //   setDiningHall("");
+        //   setSubmitted(!submitted);
+        //   setModalOpen(true);
+        } catch(err) {
+          console.log(err);
+        }
+      };
+
+    React.useEffect(() => {
+        if (menu) {
+          postMenu(menu.state);
+        }
+      }, [menu]);
+
+    const submitMenu = () => {
+        let newTotal = [];
+        for (let i = 2; i < totalList.length; i++) {
+            newTotal.push(parseFloat(totalList[i]));
+        }
+        setMenu(new Menu(newItemCart, "", newTotal));
+        setModalOpen(true);
+    }
+
+    const [modalOpen, setModalOpen] = React.useState(false);
 
     return (
         <div style={{justifyContent:"center", display:"flex"}}>
             <TopAppBar diningHall={""} setNavItem={setNavItem}/>
+            <EndingModal modalOpen={modalOpen}/>
             <div className={s.background}>
                 <div style={{justifyContent:"center", display:"flex", width:"100%"}}>
-                    <Box className={s.box}>
-                        <Stack>
-                            {
-                                <TableContainer sx={{backgroundColor:"white"}}>
-                                <Table sx={{overflowY:"scroll"}}>
-                                    <TableHead>
-                                        <TableRow sx={{backgroundColor:"rgb(134,15,31)"}}>
-                                            <TableCell sx={{color:"white"}}>Name</TableCell>
-                                            <TableCell sx={{color:"white"}}>SS</TableCell>
-                                            <TableCell sx={{color:"white"}}>Cals</TableCell>
-                                            <TableCell sx={{color:"white"}}>FG</TableCell>
-                                            <TableCell sx={{color:"white"}}>SMG</TableCell>
-                                            <TableCell sx={{color:"white"}}>CG</TableCell>
-                                            <TableCell sx={{color:"white"}}>SG</TableCell>
-                                            <TableCell sx={{color:"white"}}>PG</TableCell>
-                                            <TableCell sx={{color:"white"}}>FIG</TableCell>
-                                            <TableCell sx={{color:"white"}}>Servings</TableCell>
-                                            <TableCell sx={{color:"white"}}>Remove</TableCell>
-                                        </TableRow>
-                                    </TableHead>
-                                    <TableBody sx={{overflow:"scroll"}}>
-                                        {
-                                            newItemCart.map((item) => {
-                                                
-                                                return(
-                                                    <TableRow key={item.id.timestamp}>
-                                                        <TableCell>{item.name}</TableCell>
-                                                        {
-                                                            Object.entries(item).map(([key, value]/*parameters that give us access to entries*/) => {
-                                                                
-                                                                if ((key !== "id") && (key !== "name") && (key !=="daysServed")) { 
-                                                                    return(
-                                                                        <TableCell>{value}</TableCell>
-                                                                        );                    
-                                                                }
-                                                            })
-                                                        } 
-                                                        <TableCell > 
-                                                            <Stack >
-                                                                <Button id={item.name} onClick={onClickAdd} sx={{maxHeight: "20px", width: "100%", color:"rgb(134,15,31)"}}>
-                                                                    +
-                                                                </Button>
-                                                                <Box sx={{textAlign:"center"}}>
-                                                                    {newItemCart.map((item2) => {
-                                                                        //this was done to bypass a rendering error, tried to set a state but wouldn't work
-                                                                        if (item2.name === item.name) {
-                                                                            for (let i = 0; i < newItemCart.length; i++) {
-                                                                                if (item2.name === newItemCart[i].name) {
-                                                                                    return (
-                                                                                        <Box> {servingsList[i]} </Box>
-                                                                                    );
+                    <Stack>
+                        <Box className={s.box}>
+                            <Stack>
+                                {
+                                    <TableContainer sx={{backgroundColor:"white"}}>
+                                    <Table sx={{overflowY:"scroll"}}>
+                                        <TableHead>
+                                            <TableRow sx={{backgroundColor:"rgb(134,15,31)"}}>
+                                                <TableCell sx={{color:"white"}}>Name</TableCell>
+                                                <TableCell sx={{color:"white"}}>SS</TableCell>
+                                                <TableCell sx={{color:"white"}}>Cals</TableCell>
+                                                <TableCell sx={{color:"white"}}>FG</TableCell>
+                                                <TableCell sx={{color:"white"}}>SMG</TableCell>
+                                                <TableCell sx={{color:"white"}}>CG</TableCell>
+                                                <TableCell sx={{color:"white"}}>SG</TableCell>
+                                                <TableCell sx={{color:"white"}}>PG</TableCell>
+                                                <TableCell sx={{color:"white"}}>FIG</TableCell>
+                                                <TableCell sx={{color:"white"}}>Servings</TableCell>
+                                                <TableCell sx={{color:"white"}}>Remove</TableCell>
+                                            </TableRow>
+                                        </TableHead>
+                                        <TableBody sx={{overflow:"scroll"}}>
+                                            {
+                                                newItemCart.map((item) => {
+                                                    
+                                                    return(
+                                                        <TableRow key={item.id.timestamp}>
+                                                            <TableCell>{item.name}</TableCell>
+                                                            {
+                                                                Object.entries(item).map(([key, value]/*parameters that give us access to entries*/) => {
+                                                                    
+                                                                    if ((key !== "id") && (key !== "name") && (key !=="daysServed")) { 
+                                                                        return(
+                                                                            <TableCell>{value}</TableCell>
+                                                                            );                    
+                                                                    }
+                                                                })
+                                                            } 
+                                                            <TableCell > 
+                                                                <Stack >
+                                                                    <Button id={item.name} onClick={onClickAdd} sx={{maxHeight: "20px", width: "100%", color:"rgb(134,15,31)"}}>
+                                                                        +
+                                                                    </Button>
+                                                                    <Box sx={{textAlign:"center"}}>
+                                                                        {newItemCart.map((item2) => {
+                                                                            //this was done to bypass a rendering error, tried to set a state but wouldn't work
+                                                                            if (item2.name === item.name) {
+                                                                                for (let i = 0; i < newItemCart.length; i++) {
+                                                                                    if (item2.name === newItemCart[i].name) {
+                                                                                        return (
+                                                                                            <Box> {servingsList[i]} </Box>
+                                                                                        );
+                                                                                    }
                                                                                 }
                                                                             }
-                                                                        }
 
-                                                                    })}
-                                                                </Box>
-                                                                <Button id={item.name} sx={{maxHeight: "20px", width: "100%", color:"rgb(134,15,31)"}} onClick={onClickSub}>
-                                                                    -
+                                                                        })}
+                                                                    </Box>
+                                                                    <Button id={item.name} sx={{maxHeight: "20px", width: "100%", color:"rgb(134,15,31)"}} onClick={onClickSub}>
+                                                                        -
+                                                                    </Button>
+                                                                </Stack>  
+                                                            </TableCell>
+                                                            <TableCell>
+                                                                <Button id={item.name} onClick={deleteItem} sx={{maxHeight: "50px", width: "50%", color:"rgb(134,15,31)"}}>
+                                                                    Delete
                                                                 </Button>
-                                                            </Stack>  
-                                                        </TableCell>
-                                                        <TableCell>
-                                                            <Button id={item.name} onClick={deleteItem} sx={{maxHeight: "50px", width: "50%", color:"rgb(134,15,31)"}}>
-                                                                Delete
-                                                            </Button>
-                                                        </TableCell>
-                                                    </TableRow>
-                                                )
-                                            })
-                                        }
-                                        <TableRow key={totalList[2]}>
-                                        {
-                                            totalList.map((entry) => {
-                                                return (
-                                                    <TableCell key={entry.cal}>{entry}</TableCell>
-                                                );
-                                            })
-                                        }
-                                        </TableRow>
+                                                            </TableCell>
+                                                        </TableRow>
+                                                    )
+                                                })
+                                            }
+                                            <TableRow key={totalList[2]}>
+                                            {
+                                                totalList.map((entry) => {
+                                                    return (
+                                                        <TableCell key={entry.cal}>{entry}</TableCell>
+                                                    );
+                                                })
+                                            }
+                                            </TableRow>
 
-                                    </TableBody>
-                                </Table>
-                            </TableContainer>
-                            }
-                        </Stack>
-                    </Box>
+                                        </TableBody>
+                                    </Table>
+                                </TableContainer>
+                                }
+                            </Stack>
+                        </Box>
+                        <Button onClick={submitMenu}>
+                            Submit
+                        </Button>
+                    </Stack>
                 </div>
             </div>   
         </div>
