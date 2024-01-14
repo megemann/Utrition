@@ -21,7 +21,7 @@ const styles = {
 
 
 
-export default function MenuPage({setNavItem}) {
+export default function MenuPage({setNavItem, setItemCart}) {
     const [menus, setMenus] = React.useState([]);
     const [currentMenu, setCurrentMenu] = React.useState(new Menu([], "", []));
 
@@ -45,7 +45,7 @@ export default function MenuPage({setNavItem}) {
                 <Box sx={styles.itembox}>
                     <Stack direction={"row"}>
                             <MenuList menus={menus} setCurrentMenu={setCurrentMenu}></MenuList>
-                            <MenuDisplay currentMenu={currentMenu}/>
+                            <MenuDisplay currentMenu={currentMenu} setNewCart={setItemCart}/>
                     </Stack>
                 </Box>
             </div>

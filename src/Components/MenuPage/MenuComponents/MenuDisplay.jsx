@@ -1,4 +1,5 @@
-import {Box, Stack, Typography} from "@mui/material";
+import {Box, Stack, Typography, Button} from "@mui/material";
+import { useNavigate } from "react-router-dom";
 
 const styles = {
     container: {
@@ -14,10 +15,23 @@ const styles = {
     },
     textbox: {
         color: "white"
+    },
+    button: {
+        color: "white",
+        borderColor:"black",
+        borderWidth:"3px",
+        borderStyle:"outlined"
     }
 }
 
-export default function MenuDisplay({currentMenu}) {
+export default function MenuDisplay({currentMenu, setNewCart}) {
+    const navigate = useNavigate();
+
+    const sendMenu = () => {
+        setNewCart(currentMenu.itemList);
+        navigate("/cart");
+    }
+
     return (
         <Box sx={styles.container}>
             <Stack
@@ -66,6 +80,9 @@ export default function MenuDisplay({currentMenu}) {
                                 <Box sx={styles.textbox}>
                                     Grams of Fiber: {value[6]}
                                 </Box>
+                                <Button sx={styles.button} onClick={sendMenu}>
+                                    Send to Cart
+                                </Button>
                             </Stack>
                         )
                     }
