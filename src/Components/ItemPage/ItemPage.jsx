@@ -1,8 +1,8 @@
 import { Box, Button, Divider, Stack, Typography } from "@mui/material";
 import * as React from "react";
 import s from "./style.module.css";
-import EndingModal from "./ItemPageComponents/EndingModal";
 import TopAppBar from "../TopAppBar/TopAppBar";
+import EndingModal from "./ItemPageComponents/EndingModal";
 
 export default function ItemPage({item, setNavItem, cartItems, setCartItems}) {
 

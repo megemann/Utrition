@@ -1,7 +1,13 @@
-import {Box, Stack, Typography, Button} from "@mui/material";
+import { Box, Button, Stack } from "@mui/material";
 import { useNavigate } from "react-router-dom";
 
 const styles = {
+    button: {
+        color: "white",
+        borderColor:"black",
+        borderWidth:"3px",
+        borderStyle:"outlined"
+    },
     container: {
         width: "50%",
         maxHeight: "90vh",
@@ -15,16 +21,11 @@ const styles = {
     },
     textbox: {
         color: "white"
-    },
-    button: {
-        color: "white",
-        borderColor:"black",
-        borderWidth:"3px",
-        borderStyle:"outlined"
     }
 }
 
 export default function MenuDisplay({currentMenu, setNewCart}) {
+
     const navigate = useNavigate();
 
     const sendMenu = () => {
@@ -34,14 +35,7 @@ export default function MenuDisplay({currentMenu, setNewCart}) {
 
     return (
         <Box sx={styles.container}>
-            <Stack
-            sx={{mt:"10px"}}
-            spacing={2}
-            
-            
-            
-            
-            >
+            <Stack sx={{mt:"10px"}} spacing={2}>
             {
                 Object.entries(currentMenu).map(([key, value]) => {
                     if (key == "itemList") {
@@ -57,6 +51,7 @@ export default function MenuDisplay({currentMenu, setNewCart}) {
                             </Box>
                         )
                     } else if (key == "totalList") {
+                        //not an object, so we need to map manually
                         return (
                             <Stack>
                                 <Box sx={styles.textbox}>
@@ -73,7 +68,7 @@ export default function MenuDisplay({currentMenu, setNewCart}) {
                                 </Box>
                                 <Box sx={styles.textbox}>
                                     Grams of Sugar: {value[4]}
-                                </Box >
+                                </Box>
                                 <Box sx={styles.textbox}>
                                     Grams of Protein: {value[5]}
                                 </Box>

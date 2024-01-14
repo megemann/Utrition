@@ -1,4 +1,4 @@
-import {Stack, Box, Typography, Button, Divider} from "@mui/material";
+import { Box, Button, Divider, Stack, Typography } from "@mui/material";
 
 const styles = {
     container: {
@@ -30,30 +30,31 @@ export default function MenuList({menus, setCurrentMenu}) {
             <Stack
                 sx={{mt: "10px"}}
                 spacing={1}
-                divider={<Divider orientation="horizontal" flexItem />}>
+                divider={<Divider orientation="horizontal" flexItem />}
+            >
                 {
                     menus.map((menu) => {
+                        //did this method to allow placing the button on the far right
                         return (
                             <Box>
                                 <Stack direction={"row"}>
                                     <Box sx={{width:"95%"}}>
-                                    <Typography sx={{left:"0"}}>
-                                        Items: 
-                                        {
-                                        menu.itemList.map((item) => {
-                                            return (` ${item.name},`);
-                                        })
-                                        }
-                                    </Typography>
+                                        <Typography sx={{left:"0"}}>
+                                            Items: 
+                                            {
+                                                //cannot use join due to the item.name value needing to be accessed
+                                                menu.itemList.map((item) => {
+                                                    return (` ${item.name},`);
+                                                })
+                                            }
+                                        </Typography>
                                     </Box>
                                     <Box sx={{width:"fit content", justifyContent:"right"}}>
                                         <Button id={menu.id.timestamp} onClick={setSelectedMenu}>
                                             VIEW
                                         </Button>
                                     </Box>
-
                                 </Stack>
-
                             </Box>
                         )
                     })
