@@ -1,8 +1,6 @@
-
 import s from "./style.module.css";
-import * as React from 'react';
-import StartingModal from "./HomeComponents/StartingModal";
 import DiningGrid from "./HomeComponents/DiningGrid/DiningGrid";
+import StartingModal from "./HomeComponents/StartingModal";
 import TopAppBar from "../TopAppBar/TopAppBar";
 
  
@@ -19,9 +17,11 @@ export default function HomePage({diningHallSet, setNavItem, modalClosed, setMod
                 modalOpen={!modalClosed}
                 closeModal={closeModal}
             />
+            
             <TopAppBar diningHall={""} setNavItem={setNavItem}/>
+
             <div className={s.background}>
-                <DiningGrid diningSet={setDining}/>
+                <DiningGrid setDining={setDining}/>
             </div>
         </div>
     );

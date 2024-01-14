@@ -2,7 +2,7 @@ import {Box, Button, Grid, Typography} from "@mui/material";
 import s from "./style.module.css";
 import { useNavigate } from "react-router-dom";
 
-const simpleStyles = {
+const styles = {
     button: {
         width: "98%",
         height: "98%",
@@ -11,27 +11,27 @@ const simpleStyles = {
 }
 
 
-export default function DiningGrid({diningSet}) {
+export default function DiningGrid({setDining}) {
 
     const navigate = useNavigate();
 
     const navigateWoo = () => {
-        diningSet("Worcester");
+        setDining("Worcester");
         navigate("/Worcester");
     }
 
     const navigateBerk = () => {
-        diningSet("Berkshire")
+        setDining("Berkshire")
         navigate("/Berkshire");
     }
 
     const navigateFrank = () => {
-        diningSet("Franklin")
+        setDining("Franklin")
         navigate("/Franklin");
     }
 
     const navigateHamp = () => {
-        diningSet("Hampshire");
+        setDining("Hampshire");
         navigate("/Hampshire");
     }
 
@@ -39,22 +39,22 @@ export default function DiningGrid({diningSet}) {
         <Box sx={{flexGrow:1}}>
             <Grid container spacing={2} sx={{padding: "15px", height:"93vh"}}>
                 <Grid item xs={6}>
-                    <Button className={s.woobutton} sx={simpleStyles.button} onClick={navigateWoo}>
+                    <Button className={s.woobutton} sx={styles.button} onClick={navigateWoo}>
                         <Box className={s.wooimagebox}/> 
                     </Button>
                 </Grid>
                 <Grid item xs={6}>
-                    <Button className={s.berkbutton} sx={simpleStyles.button} onClick={navigateBerk}>
+                    <Button className={s.berkbutton} sx={styles.button} onClick={navigateBerk}>
                         <Box className={s.berkimagebox}/>               
                     </Button>
                 </Grid>
                 <Grid item xs={6}>
-                    <Button className={s.frankbutton} sx={simpleStyles.button} onClick={navigateFrank}>
+                    <Button className={s.frankbutton} sx={styles.button} onClick={navigateFrank}>
                         <Box className={s.frankimagebox}/>
                     </Button>
                 </Grid>
                 <Grid item xs={6}>
-                    <Button className={s.hampbutton} sx={simpleStyles.button} onClick={navigateHamp}>
+                    <Button className={s.hampbutton} sx={styles.button} onClick={navigateHamp}>
                         <Box className={s.hampimagebox}/>
                     </Button>
                 </Grid>

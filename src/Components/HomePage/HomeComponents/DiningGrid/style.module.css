@@ -3,21 +3,6 @@
     background-size: 100%;
 }
 
-.berkbutton {
-    background-image: url("/public/BerkInside.jpg");
-    background-size: 100%;
-}
-
-.frankbutton {
-    background-image: url("/public/FrankInside.jpg");
-    background-size: 100%;
-}
-
-.hampbutton {
-    background-image: url("/public/HampInside.jpg");
-    background-size: 100%;
-}
-
 .wooimagebox:hover {
     opacity: 0;
 }
@@ -31,6 +16,11 @@
     -o-background-size: cover;
     background-size: cover;
     transition: 0.3s;
+}
+
+.berkbutton {
+    background-image: url("/public/BerkInside.jpg");
+    background-size: 100%;
 }
 
 .berkimagebox:hover {
@@ -48,6 +38,11 @@
     transition: 0.3s;
 }
 
+.frankbutton {
+    background-image: url("/public/FrankInside.jpg");
+    background-size: 100%;
+}
+
 .frankimagebox:hover {
     opacity: 0;
 }
@@ -61,6 +56,11 @@
     -o-background-size: cover;
     background-size: cover;
     transition: 0.3s;
+}
+
+.hampbutton {
+    background-image: url("/public/HampInside.jpg");
+    background-size: 100%;
 }
 
 .hampimagebox:hover {
