@@ -1,10 +1,10 @@
-import { Typography, Box, Stack, Button } from "@mui/material";
-import TopAppBar from "../TopAppBar/TopAppBar";
-import s from "./style.module.css"
-import ItemTable from "./DiningHallPageComponents/ItemTable";
-import FilterChecklist from "./DiningHallPageComponents/FilterChecklist";
+import {Box, Button, Stack } from "@mui/material";
 import * as React from "react";
 import { useNavigate } from "react-router-dom";
+import s from "./style.module.css";
+import FilterChecklist from "./DiningHallPageComponents/FilterChecklist";
+import ItemTable from "./DiningHallPageComponents/ItemTable";
+import TopAppBar from "../TopAppBar/TopAppBar";
 
 const styles = {
     itembox: {
@@ -25,6 +25,7 @@ export default function DiningHallPage({hallName, items, setNavItem}) {
         navigate("/CreateItem");
     };
 
+    //passed to the table
     const [tableHeaders, setTableHeaders] = React.useState([]);
 
     return (

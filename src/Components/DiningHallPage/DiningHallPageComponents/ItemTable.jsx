@@ -1,16 +1,30 @@
-import { FlashOffRounded } from "@mui/icons-material";
-import { Box, TableContainer, TableHead, TableRow, TableCell, TableBody, Table, TablePagination, Button } from "@mui/material";
+import { Box, Button, TableContainer, TableHead, TableRow, TableCell, TableBody, Table, TablePagination } from "@mui/material";
 import * as React from "react";
 import { useNavigate } from "react-router-dom";
 
 const Today = new Date();
+const ROWSPERPAGE = parseInt(10);
 
-
+const styles = {
+    viewbutton: {
+        mt:"8px", 
+        color: "rgb(134,15,31)", 
+        backgroundColor: "rgba(0,0,0,0.3)"
+    },
+    container: {
+        mr: "2%",  
+        width:"68%", 
+        maxheight:"80vh", 
+        overflowY:"auto", 
+        backgroundColor:"rgb(134,15,31)"
+    }
+}
 
 export default function ItemTable({items, headers, setNavItem}) {
 
     const navigate = useNavigate();
 
+    //allows access to the current day of the week
     var days = ['Sunday','Monday','Tuesday','Wednesday','Thursday','Friday','Saturday'];
     var day = days[ Today.getDay() ];
 
@@ -23,21 +37,26 @@ export default function ItemTable({items, headers, setNavItem}) {
     const [sgDisabled, setSugarGramsDisabled] = React.useState(true);
     const [pgDisabled, setProteinGramsDisabled] = React.useState(true);
     const [figDisabled, setFiberGramsDisabled] = React.useState(true);
-    
     const [showOnlyToday, setShowToday] = React.useState(false);
-    const [dayItems, setDayItems] = React.useState([]);
+    const [todaysItems, setDayItems] = React.useState([]);
 
+    //represents visible rows
     const [visibleRows, setVisibleRows] = React.useState([]);
 
-    const head = ["Name", "Serving Size", "Calories", "Fat (g)", "Sodium (mg)", "Carbs (g)", "Sugar (g)", "Protein (g)", "Fiber (g)"];
+    const headerList = [
+    "Name", 
+    "Serving Size", 
+    "Calories", 
+    "Fat (g)", 
+    "Sodium (mg)", 
+    "Carbs (g)", 
+    "Sugar (g)", 
+    "Protein (g)", 
+    "Fiber (g)"
+    ];
 
     const [page, setPage] = React.useState(0);
     const [rowsPerPage, setRowsPerPage] = React.useState(10);
-
-    const handleChangeRowsPerPage = (event) => {
-        setRowsPerPage(parseInt(event.target.value, 10));
-        setPage(0);
-      };
 
     const handleChangePage = (event, newPage) => {
         setPage(newPage);
@@ -45,14 +64,13 @@ export default function ItemTable({items, headers, setNavItem}) {
       
     const handleCount = () => {
         if (showOnlyToday) {
-            return(dayItems.length);
+            return(todaysItems.length);
         } else {
             return(items.length);
         }
     }
-    
       
-    const onClickButton = (event) => {
+    const onClickView = (event) => {
         let done = false;
         let loop = 0;
         while (!done) {
@@ -68,9 +86,9 @@ export default function ItemTable({items, headers, setNavItem}) {
         
     React.useEffect(() => {
         if (showOnlyToday) {
-            setVisibleRows(dayItems.slice(page * rowsPerPage, page * rowsPerPage + rowsPerPage));
+            setVisibleRows(todaysItems.slice(page * ROWSPERPAGE, page * ROWSPERPAGE + ROWSPERPAGE));
         } else {
-            setVisibleRows(items.slice(page * rowsPerPage, page * rowsPerPage + rowsPerPage));
+            setVisibleRows(items.slice(page * ROWSPERPAGE, page * ROWSPERPAGE + ROWSPERPAGE));
         }
         console.log(visibleRows)
     }, [showOnlyToday, items, page])
@@ -80,6 +98,7 @@ export default function ItemTable({items, headers, setNavItem}) {
     }, [showOnlyToday])
 
     React.useEffect(() => {
+        //checks for what items are served today
         setDayItems([]);
         let list = [];
         console.log(items.length);
@@ -102,6 +121,7 @@ export default function ItemTable({items, headers, setNavItem}) {
 
 
     React.useEffect(() => {
+        //handles the header list from the filter
         setServingSizeDisabled(true);
         setCaloriesDisabled(true);
         setFatGramsDisabled(true);
@@ -136,13 +156,14 @@ export default function ItemTable({items, headers, setNavItem}) {
     }, [headers])
     
     return (
-        <Box sx={{mr: "2%",  width:"68%", maxheight:"80vh", overflowY:"auto", backgroundColor:"rgb(134,15,31)"}}>
+        <Box sx={styles.container}>
             <TableContainer sx={{backgroundColor:"white"}}>
             <Table sx={{overflowY:"scroll"}}>
                 <TableHead>
                     <TableRow sx={{backgroundColor:"rgb(134,15,31)"}}>
                         {   
-                            head.map((header) => {
+                            headerList.map((header) => {
+                                //maps the headers list to the corresponding visible columns
                                 if ((header !== "Serving Size" || !ssDisabled) && 
                                 (header !== "Calories" || !calDisabled) && 
                                 (header !== "Fat (g)" || !fgDisabled) && 
@@ -166,9 +187,9 @@ export default function ItemTable({items, headers, setNavItem}) {
                                 <TableRow key={item.name}>
                                     <TableCell>{item.name}</TableCell>
                                     {
-                                        Object.entries(item).map(([key, value]/*parameters that give us access to entries*/) => {
+                                        Object.entries(item).map(([key, value]/*like "key:value" in the item object*/) => {
                                             if ((key !== "id") && (key !== "name") && (key !=="daysServed")) {
-                                                
+                                                //checks if the value has been filtered out or not
                                                 if ((key !== "ss" || !ssDisabled) && 
                                                     (key !== "cal" || !calDisabled) && 
                                                     (key !== "fg" || !fgDisabled) && 
@@ -177,14 +198,15 @@ export default function ItemTable({items, headers, setNavItem}) {
                                                     (key !== "sg" || !sgDisabled) && 
                                                     (key !== "pg" || !pgDisabled) &&
                                                     (key !== "fig" || !figDisabled)) {
-                                                        return(
-                                                            <TableCell>{value}</TableCell>
-                                                            );     
+
+                                                    return(
+                                                        <TableCell>{value}</TableCell>
+                                                        );     
                                                 }                
                                             }
                                         })
                                     } 
-                                    <Button id={item.id.timestamp} sx={{mt:"8px", color: "rgb(134,15,31)", backgroundColor: "rgba(0,0,0,0.3)"}} onClick={onClickButton}>
+                                    <Button id={item.id.timestamp} sx={styles.viewbutton} onClick={onClickView}>
                                         View
                                     </Button>
                                 </TableRow>
@@ -195,14 +217,13 @@ export default function ItemTable({items, headers, setNavItem}) {
             </Table>
         </TableContainer>
         <TablePagination
-            rowsPerPageOptions={[8]}
-          component="div"
-          count={handleCount()}
-          rowsPerPage={10}
-          onPageChange={handleChangePage}
-          page={page}
-          onRowsPerPageChange={handleChangeRowsPerPage}
-          sx={{color:"white"}}
+            rowsPerPageOptions={[]/*allows for no change of rowsperpage*/}
+            component="div"
+            count={handleCount()}
+            rowsPerPage={10}
+            onPageChange={handleChangePage}
+            page={page}
+            sx={{color:"white"}}
         />
         </Box>
     );
