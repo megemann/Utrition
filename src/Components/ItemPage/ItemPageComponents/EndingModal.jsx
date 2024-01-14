@@ -1,8 +1,5 @@
-import {Typography,Modal, Box, Button, Stack} from "@mui/material";
+import { Box, Button, Stack, Modal, Typography } from "@mui/material";
 import { useNavigate } from "react-router-dom";
-import * as React from "react";
-
-const today = new Date();
 
 const style = {
     popup: {
@@ -41,7 +38,6 @@ const style = {
         "&:hover": {
             backgroundColor:"Green"
         }
-        
     }
   };
 
@@ -59,34 +55,38 @@ export default function EndingModal({modalOpen, name}) {
 
     return (
         <Modal
-        open={modalOpen}
-        aria-labelledby="modal-modal-title"
-        aria-describedby="modal-modal-description"
-    >
-        <Box sx={style.popup} align={"center"}>
-            <Box sx={style.titlebox}>
-                <Typography id="modal-modal-title" variant="h6" component="h2" sx={style.title} align="center">
-                    <i><b>{name} was successfully added!</b></i>
-                </Typography>
-            </Box>
-        <Typography id="modal-modal-description" sx={{ mt: 2 }}>
-            Thank you for your contribution.
-        </Typography>
-        <Stack
-        direction={"row"}
-        spacing={3}
-        sx={{mt:"3vh", justifyContent:"center"}}
-        
+            open={modalOpen}
+            aria-labelledby="modal-modal-title"
+            aria-describedby="modal-modal-description"
         >
-        <Button sx={style.button} onClick={navigateHome}>
-            <b>Return to Home</b>
-        </Button>
-        <Button sx={style.button} onClick={navigateCart}>
-            <b>Finish at Cart</b>
-        </Button>
-        </Stack>
-
-        </Box>
-    </Modal>
+            <Box sx={style.popup} align={"center"}>
+                <Box sx={style.titlebox}>
+                    <Typography 
+                        id="modal-modal-title" 
+                        variant="h6"
+                        component="h2" 
+                        sx={style.title} 
+                        align="center"
+                    >
+                        <i><b>{name} was successfully added!</b></i>
+                    </Typography>
+                </Box>
+                <Typography id="modal-modal-description" sx={{ mt: 2 }}>
+                    Thank you for your contribution.
+                </Typography>
+                <Stack
+                    direction={"row"}
+                    spacing={3}
+                    sx={{mt:"3vh", justifyContent:"center"}}
+                >
+                    <Button sx={style.button} onClick={navigateHome}>
+                        <b>Return to Home</b>
+                    </Button>
+                    <Button sx={style.button} onClick={navigateCart}>
+                        <b>Finish at Cart</b>
+                    </Button>
+                </Stack>
+            </Box>
+        </Modal>
     );
 }

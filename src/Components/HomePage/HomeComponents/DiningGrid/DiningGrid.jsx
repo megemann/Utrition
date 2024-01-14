@@ -1,4 +1,4 @@
-import {Box, Button, Grid, Typography} from "@mui/material";
+import {Box, Button, Grid} from "@mui/material";
 import s from "./style.module.css";
 import { useNavigate } from "react-router-dom";
 
