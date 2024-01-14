@@ -9,8 +9,6 @@ import EndingModal from "./CartComponents/EndingModal";
 const ADD = 1;
 const SUB = 0;
 
-
-
 export default function CartPage({itemCart, setNavItem, setItemCart}) {
 
     const [totalList, setTotalList] = React.useState([]);
