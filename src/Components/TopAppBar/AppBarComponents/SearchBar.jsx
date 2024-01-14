@@ -1,19 +1,18 @@
-import { Input, Box, Stack, Divider, Button, Hidden } from "@mui/material";
-import { getSuggestedQuery } from "@testing-library/react";
-import * as React from "react";
-import { BrowserRouter, Link, Routes, Route } from "react-router-dom"; //for routing to new webpages
-import { useNavigate } from "react-router-dom";
+import { Box, Button, Divider, Input, Stack } from "@mui/material";
 import SearchRoundedIcon from '@mui/icons-material/SearchRounded';
-
+import * as React from "react";
+import { useNavigate } from "react-router-dom";
 
 export default function SearchBar({items, onFocused, setItem}) {
 
-    const navigate = useNavigate();
-
     const [suggestionList, setSuggestionList] = React.useState([]);
-    const [overflowY, setOverflowY] = React.useState("visible");
-    const [maxHeight, setMaxHeight] = React.useState("25px")
     const [searchVal, setSearchVal] = React.useState("");
+
+    //used to access/change css properties
+    const [overflowY, setOverflowY] = React.useState("visible");
+    const [maxHeight, setMaxHeight] = React.useState("25px");
+
+    const navigate = useNavigate();
 
     const handleSearchChange = (event) => {
         setSearchVal((event.target.value));
@@ -23,7 +22,7 @@ export default function SearchBar({items, onFocused, setItem}) {
         onFocused(true);
     }
 
-    const onClickButton = (event) => {
+    const onClickItem = (event) => {
         setSearchVal("");
         let done = false;
         let loop = 0;
@@ -83,37 +82,34 @@ export default function SearchBar({items, onFocused, setItem}) {
 
     return (
         <Box sx={style.box}>
-                <Stack direction={"row"}>
-                    <SearchRoundedIcon sx={{filter: "invert(1)", mt:"1px"}}/>
-                        <Input 
-                            size={"small"} 
-                            sx={style.input} 
-                            disableUnderline 
-                            value={searchVal} 
-                            onChange={handleSearchChange} 
-                            onFocus={handleFocused}
-                        />
-                </Stack>
-                    
-                
+            <Stack direction={"row"}>
+                <SearchRoundedIcon sx={{filter: "invert(1)", mt:"1px"}}/>
+                    <Input 
+                        size={"small"} 
+                        sx={style.input} 
+                        disableUnderline 
+                        value={searchVal} 
+                        onChange={handleSearchChange} 
+                        onFocus={handleFocused}
+                    />
+            </Stack>
             <Stack 
                 sx={{margin: "20px", justifyContent:"center"}} 
                 spacing={3}
-                divider={<Divider orientation="horizontal" flexItem />}>
-                    {
-                        suggestionList.map((item) => {
-                            console.log(item.name + ": " + item.id.timestamp)
-                            return( 
-                                <Button id={item.id.timestamp} sx={{height: "30px"}} onClick={onClickButton}>
-                                    {item.name}
-                                </Button> 
-                            )
-                        })
-                    }
-                
+                divider={<Divider orientation="horizontal" flexItem />}
+            >
+                {
+                    //represents all items in the list that have the same letters at the beginning of their name as the search content
+                    suggestionList.map((item) => {
+                        console.log(item.name + ": " + item.id.timestamp)
+                        return( 
+                            <Button id={item.id.timestamp} sx={{height: "30px", color:"rgb(134,15,31)"}} onClick={onClickItem}>
+                                {item.name}
+                            </Button> 
+                        );
+                    })
+                }
             </Stack>
         </Box>
-
-
     )
 }

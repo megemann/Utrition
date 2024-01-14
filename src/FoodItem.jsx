@@ -1,4 +1,4 @@
-import React, {Component} from 'react';
+import {Component} from 'react';
 
 class FoodItem extends Component{
     constructor(ss, cal, fg, smg, cg, sg, pg, fig, name, daysServed) {

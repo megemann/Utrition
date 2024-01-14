@@ -2,11 +2,11 @@ import {Box, Button, Divider, FormGroup, FormControl, Stack} from "@mui/material
 import TopAppBar from "../TopAppBar/TopAppBar";
 import s from "./style.module.css"
 import * as React from "react";
+import API from "../../api/API";
 import DayChecklist from "./CreateItemComponents/DayChecklist";
 import DiningSelect from "./CreateItemComponents/DiningSelect";
 import NutritionTextFields from "./CreateItemComponents/NutritionTextFields";
 import FoodItem from "../../FoodItem";
-import API from "../../api/API";
 import EndingModal from "./CreateItemComponents/EndingModal";
 
 export default function CreateItemPage({itemsList, onDiningChange, setNavItem}) {
