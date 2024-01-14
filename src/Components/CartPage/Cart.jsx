@@ -1,7 +1,7 @@
-import TopAppBar from "../TopAppBar/TopAppBar";
-import s from "./style.module.css";
-import { Box, Stack, TableContainer, Table, TableHead, TableRow, TableCell, TableBody, Button } from "@mui/material";
+import { Box, Button, Stack, TableContainer, Table, TableHead, TableRow, TableCell, TableBody } from "@mui/material";
 import * as React from "react";
+import s from "./style.module.css";
+import TopAppBar from "../TopAppBar/TopAppBar";
 import FoodItemAPI from "../../api/itemAPI";
 import Menu from "../../Menu";
 import EndingModal from "./CartComponents/EndingModal";
@@ -13,26 +13,13 @@ const SUB = 0;
 
 export default function CartPage({itemCart, setNavItem, setItemCart}) {
 
-    /*
-    Whats left:
-        add meal viewing page
-
-        export table to a different document here
-
-        add login support
-        add user ids
-
-        code clean up
-        commnet code
-        
-        ?add profile stuff
-        ?add advanced style
-        
-    */
     const [totalList, setTotalList] = React.useState([]);
     const [newItemCart, setNewItemCart] = React.useState([]);
     const [servingsList, setServingsList] = React.useState([]);
+   
     const [menu, setMenu] = React.useState();
+
+    const [modalOpen, setModalOpen] = React.useState(false);
 
     const [savedDate, setSavedDate] = React.useState([]);
 
@@ -42,6 +29,27 @@ export default function CartPage({itemCart, setNavItem, setItemCart}) {
 
     const onClickSub = (event) => {
         onClick(-0.25, event);
+    }
+    
+    const onClick = (num, event) => {
+        let newServingsList = servingsList;
+        //iterates through the list until the button id is the same as the corresponding item id
+        for (let i = 0; i < newItemCart.length; i++) {
+            if (event.target.id === newItemCart[i].name) {
+                newServingsList[i] = Math.max(newServingsList[i] + num, 0);
+            }
+        }
+        setServingsList(newServingsList);
+        reRender();
+    }
+
+    const reRender = () => {
+        //Refreshes the table because an item in the mapped list changed
+        let list = newItemCart;
+        let date = list[0].daysServed;
+        list[0].daysServed = ["N/A"];
+        setNewItemCart(list);
+        setSavedDate(date);
     }
 
     const deleteItem = (event) => {
@@ -55,37 +63,17 @@ export default function CartPage({itemCart, setNavItem, setItemCart}) {
         
         //it will refresh if it has any items still left
         setTotalList(["Total", "N/A", 0,0,0,0,0,0,0]);
-   
     }
-    
-    const onClick = (num, event) => {
-        let newServingsList = servingsList;
-        for (let i = 0; i < newItemCart.length; i++) {
-            if (event.target.id === newItemCart[i].name) {
-                newServingsList[i] = Math.max(newServingsList[i] + num, 0);
-            }
-        }
-        setServingsList(newServingsList);
-        reRender();
-    }
-
-    const reRender = () => {
-        let list = newItemCart;
-        let date = list[0].daysServed;
-        list[0].daysServed = ["N/A"];
-        setNewItemCart(list);
-        setSavedDate(date);
-    }
-
-
 
     React.useEffect(() => {
 
         let newCartlist = [];
         let newServingsList = [];
+        //for each item in item cart
         for (let i = 0; i < itemCart.length; i++) {
             let item = itemCart[i];
             let exists = false;
+            //check to see if item is already in the list, if so add a serving
             for (let j = 0; j < newCartlist.length; j++) {
                 if (newCartlist[j].name === item.name) {
                     newServingsList[j] = newServingsList[j] + 1;
@@ -107,6 +95,7 @@ export default function CartPage({itemCart, setNavItem, setItemCart}) {
         let list = ["Total", "N/A"];
         if (newItemCart.length > 0) {
             let totals = [0,0,0,0,0,0,0];
+            //for each item in the cart, add up each amount of every nutrient/calories
             for (let i = 0; i < newItemCart.length; i++) {
                 totals[0] = totals[0] + servingsList[i]*parseFloat(newItemCart[i].cal);
                 totals[1] = totals[1] + servingsList[i]*parseFloat(newItemCart[i].fg);
@@ -116,18 +105,16 @@ export default function CartPage({itemCart, setNavItem, setItemCart}) {
                 totals[5] = totals[5] + servingsList[i]*parseFloat(newItemCart[i].pg);
                 totals[6] = totals[6] + servingsList[i]*parseFloat(newItemCart[i].fig);
             }     
-            list.push(totals[0].toFixed(1));
-            list.push(totals[1].toFixed(1));
-            list.push(totals[2].toFixed(1));
-            list.push(totals[3].toFixed(1));
-            list.push(totals[4].toFixed(1));
-            list.push(totals[5].toFixed(1));
-            list.push(totals[6].toFixed(1));
+            // push each element as a float with one digit
+            for (let i = 0; i < 7; i++) {
+                list.push(totals[i].toFixed(1));
+            }
             setTotalList(list);
         }
     }, [servingsList, savedDate])
 
     React.useEffect(() => {
+        //also a part of rerender, changes the date back to what it was
         if (itemCart.length > 0 && (itemCart[0]).daysServed == ["N/A"]) {
             let list = itemCart;
             list[0].daysServed = savedDate;
@@ -140,12 +127,6 @@ export default function CartPage({itemCart, setNavItem, setItemCart}) {
         try {
           const response = await FoodItemAPI.postMenu(menu);
           console.log(response);
-        //   setName(item.name);
-        //   setNutritionText([]);
-        //   setDayList([]);
-        //   setDiningHall("");
-        //   setSubmitted(!submitted);
-        //   setModalOpen(true);
         } catch(err) {
           console.log(err);
         }
@@ -172,7 +153,7 @@ export default function CartPage({itemCart, setNavItem, setItemCart}) {
 
     }
 
-    const [modalOpen, setModalOpen] = React.useState(false);
+    
 
     return (
         <div style={{justifyContent:"center", display:"flex"}}>
@@ -209,6 +190,7 @@ export default function CartPage({itemCart, setNavItem, setItemCart}) {
                                                         <TableRow key={item.id.timestamp}>
                                                             <TableCell>{item.name}</TableCell>
                                                             {
+                                                                //for each entry, map it into a table cell
                                                                 Object.entries(item).map(([key, value]/*parameters that give us access to entries*/) => {
                                                                     
                                                                     if ((key !== "id") && (key !== "name") && (key !=="daysServed")) { 
@@ -220,6 +202,7 @@ export default function CartPage({itemCart, setNavItem, setItemCart}) {
                                                             } 
                                                             <TableCell > 
                                                                 <Stack >
+                                                                    
                                                                     <Button id={item.name} onClick={onClickAdd} sx={{maxHeight: "20px", width: "100%", color:"rgb(134,15,31)"}}>
                                                                         +
                                                                     </Button>
@@ -238,7 +221,7 @@ export default function CartPage({itemCart, setNavItem, setItemCart}) {
 
                                                                         })}
                                                                     </Box>
-                                                                    <Button id={item.name} sx={{maxHeight: "20px", width: "100%", color:"rgb(134,15,31)"}} onClick={onClickSub}>
+                                                                    <Button id={item.name} onClick={onClickSub} sx={{maxHeight: "20px", width: "100%", color:"rgb(134,15,31)"}} >
                                                                         -
                                                                     </Button>
                                                                 </Stack>  
