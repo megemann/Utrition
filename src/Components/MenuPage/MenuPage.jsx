@@ -28,7 +28,7 @@ export default function MenuPage({setNavItem, setItemCart}) {
     const fetchMenus = async () =>{
         try
         {
-            setMenus(await FoodItemAPI.fetchMenus());
+            setMenus(await FoodItemAPI.fetchAllMenus());
         } 
         catch(err)
         {console.log(err);}

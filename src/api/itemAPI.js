@@ -17,7 +17,7 @@ class FoodItemAPI {
         return response.data;
     }
 
-    static async fetchMenus() {
+    static async fetchAllMenus() {
         const response = await axios.get(`${BASE_ROOT}/api/Menus`);
         console.log(response.data);
         return response.data;
@@ -29,15 +29,12 @@ class FoodItemAPI {
         return response.data;
     }
 
-
-
     static async fetchAllItems() {
         const response1 = await axios.get(`${BASE_ROOT}/api/Worcester`);
         const response2 = await axios.get(`${BASE_ROOT}/api/Berkshire`);
         const response3 = await axios.get(`${BASE_ROOT}/api/Hampshire`);
         const response4 = await axios.get(`${BASE_ROOT}/api/Franklin`);
-        const response = [response1.data, response2.data, response3.data, response4.data];
-        return (response);
+        return ([response1.data, response2.data, response3.data, response4.data]);
     }
 }
 
