@@ -6,7 +6,7 @@ import DayChecklist from "./CreateItemComponents/DayChecklist";
 import DiningSelect from "./CreateItemComponents/DiningSelect";
 import NutritionTextFields from "./CreateItemComponents/NutritionTextFields";
 import FoodItem from "../../FoodItem";
-import FoodItemAPI from "../../api/itemAPI";
+import API from "../../api/API";
 import EndingModal from "./CreateItemComponents/EndingModal";
 
 export default function CreateItemPage({itemsList, onDiningChange, setNavItem}) {
@@ -66,7 +66,7 @@ export default function CreateItemPage({itemsList, onDiningChange, setNavItem}) 
     const postItem = async item => {
         try {
             //post and reset
-            const response = await FoodItemAPI.postItem(item, diningHall);
+            const response = await API.postItem(item, diningHall);
             console.log(response);
             setName(item.name);
             setNutritionText([]);

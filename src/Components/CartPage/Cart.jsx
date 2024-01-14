@@ -2,7 +2,7 @@ import { Box, Button, Stack, TableContainer, Table, TableHead, TableRow, TableCe
 import * as React from "react";
 import s from "./style.module.css";
 import TopAppBar from "../TopAppBar/TopAppBar";
-import FoodItemAPI from "../../api/itemAPI";
+import API from "../../api/API";
 import Menu from "../../Menu";
 import EndingModal from "./CartComponents/EndingModal";
 
@@ -125,7 +125,7 @@ export default function CartPage({itemCart, setNavItem, setItemCart}) {
 
     const postMenu = async menu => {
         try {
-          const response = await FoodItemAPI.postMenu(menu);
+          const response = await API.postMenu(menu);
           console.log(response);
         } catch(err) {
           console.log(err);

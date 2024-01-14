@@ -1,7 +1,7 @@
 import {Box, Stack} from "@mui/material";
 import  * as React from "react";
 import s from "./style.module.css";
-import FoodItemAPI from "../../api/itemAPI";
+import API from "../../api/API";
 import Menu from "../../Menu";
 import MenuDisplay from "./MenuComponents/MenuDisplay";
 import MenuList from "./MenuComponents/MenuList";
@@ -26,7 +26,7 @@ export default function MenuPage({setNavItem, setItemCart}) {
     const fetchMenus = async () =>{
         try
         {
-            setMenus(await FoodItemAPI.fetchAllMenus());
+            setMenus(await API.fetchAllMenus());
         } 
         catch(err)
         {console.log(err);}

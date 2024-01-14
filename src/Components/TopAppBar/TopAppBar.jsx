@@ -3,7 +3,7 @@ import MenuHome from "./MenuHome";
 import * as React from "react";
 import s from "./style.module.css";
 import SearchBar from "./SearchBar";
-import FoodItemAPI from "../../api/itemAPI";
+import API from "../../api/API";
 
 export default function TopAppBar({diningHall, setNavItem}) {
     const [items, setItems] = React.useState([]);
@@ -22,7 +22,7 @@ export default function TopAppBar({diningHall, setNavItem}) {
     const fetchAllItems = async () =>{
         try
         {
-          setItems(await FoodItemAPI.fetchAllItems());
+          setItems(await API.fetchAllItems());
           console.log(items);
         } 
         catch(err)
@@ -32,7 +32,7 @@ export default function TopAppBar({diningHall, setNavItem}) {
     const fetchItems = async (diningHall) =>{
         try
         {
-          setItems([await FoodItemAPI.fetchItems(diningHall)]);
+          setItems([await API.fetchItems(diningHall)]);
           console.log(items);
         } 
         catch(err)

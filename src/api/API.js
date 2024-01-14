@@ -2,9 +2,8 @@ import axios from "axios";
 
 const BASE_ROOT = "http://localhost:8080";
 
-
 //make sure to set CORS config
-class FoodItemAPI {
+class API {
     static async fetchItems(diningHall) {
         const response = await axios.get(`${BASE_ROOT}/api/${diningHall}`);
         console.log(response.data);
@@ -38,4 +37,4 @@ class FoodItemAPI {
     }
 }
 
-export default FoodItemAPI;
+export default API;

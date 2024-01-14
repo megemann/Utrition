@@ -1,18 +1,20 @@
-import { BrowserRouter, Link, Routes, Route } from "react-router-dom"; //for routing to new webpages
-import HomePage from "../HomePage/HomePage";
-import DiningHallPage from "../DiningHallPage/DiningHallPage";
-import CreateItemPage from "../CreateItemPage/CreateItemPage";
-import FoodItemAPI from "../../api/itemAPI";
+import { BrowserRouter, Route, Routes } from "react-router-dom"; //for routing to new webpages
 import * as React from  "react";
+import API from "../../api/API";
+import CartPage from "../CartPage/Cart";
+import CreateItemPage from "../CreateItemPage/CreateItemPage";
+import DiningHallPage from "../DiningHallPage/DiningHallPage";
+import HomePage from "../HomePage/HomePage";
 import FoodItem from "../../FoodItem";
 import ItemPage from "../ItemPage/ItemPage";
-import CartPage from "../CartPage/Cart";
 import MenuPage from "../MenuPage/MenuPage";
 
-
+//main page, has access to all other components
 export default function NavDrawer(){
 
+    //saves modal closed state of the home page so it does not open on rerouting back
     const [modalClosed, setModalClosed] = React.useState(false);
+    
     const [cartItems, setCartItems] = React.useState([]);
     const [items, setItems] = React.useState([]);
     const [diningHall, setDiningHall] = React.useState("");
@@ -33,7 +35,7 @@ export default function NavDrawer(){
         try
         {
             setItems([]);
-            setItems(await FoodItemAPI.fetchItems(diningHall));
+            setItems(await API.fetchItems(diningHall));
             console.log(items);
         } 
         catch(err)
@@ -50,7 +52,6 @@ export default function NavDrawer(){
 
     return (
         <BrowserRouter>
-        <div>
             <Routes>
                 <Route path={"/"} element={<HomePage diningHallSet={setDiningHall} setNavItem={setNavItem} modalClosed={modalClosed} setModalClosed={setModalClosed}/>}/>
                 <Route path={"/Worcester"} element={<DiningHallPage hallName={"Worcester"} items={items} setNavItem={setNavItem}/>}/>
@@ -62,7 +63,6 @@ export default function NavDrawer(){
                 <Route path={"/cart"} element={<CartPage itemCart={cartItems} setNavItem={setNavItem} setItemCart={setCartItems}/>}/>
                 <Route path={"/menus"} element={<MenuPage setNavItem={setNavItem} setItemCart={setCartItems}/>}/>
             </Routes>
-        </div>
         </BrowserRouter>
     );
 }
