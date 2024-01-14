@@ -4,7 +4,7 @@ import * as React from "react";
 
 export default function NutritionTextFields({onAllFilled, submitted}) {
 
-    //this can be a list, just take list change specific value and then set, saves sm time
+    //cannot be a list due to rendering issues
     const [ss, setServingSize] = React.useState("");
     const [cal, setCalories] = React.useState(0);
     const [fg, setFatGrams] = React.useState(0.0);
@@ -60,6 +60,7 @@ export default function NutritionTextFields({onAllFilled, submitted}) {
     }, [name, ss, cal, fg, smg, cg, sg, pg, fig])
 
     React.useEffect(() => {
+        //reset
         setServingSize("");
         setCalories(0);
         setFatGrams(0);

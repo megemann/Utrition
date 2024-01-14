@@ -1,8 +1,5 @@
-import {Typography,Modal, Box, Button} from "@mui/material";
+import {Button, Box, Modal, Typography} from "@mui/material";
 import { useNavigate } from "react-router-dom";
-import * as React from "react";
-
-const today = new Date();
 
 const style = {
     popup: {

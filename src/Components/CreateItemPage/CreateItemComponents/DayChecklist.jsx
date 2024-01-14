@@ -92,8 +92,6 @@ export default function DayChecklist({onCheckChange, submitted}) {
         setSelectAll(false);
     }, [submitted]);
 
-
-
     return (
         <FormControl fullWidth>
             <FormGroup row sx={{justifyContent:"center"}}>

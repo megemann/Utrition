@@ -22,6 +22,7 @@ export default function CreateItemPage({itemsList, onDiningChange, setNavItem}) 
 
     const submit = () => {
 
+        //check for the same name
         let same = false;
         let loop = 0;
         while (!same && loop < itemsList.length) {
@@ -30,8 +31,9 @@ export default function CreateItemPage({itemsList, onDiningChange, setNavItem}) 
         }
 
         if (same) {
-            alert("Item Already Exists"); //later add support for adding days, need to learn mongodb update
+            alert("Item Already Exists"); //later support for adding days?
         } else {
+            //create a new item
             if (nutritionText[0] != undefined && dayList != [] && diningHall != '') {
                 const pushItem = new FoodItem(
                     nutritionText[0], 
@@ -63,20 +65,22 @@ export default function CreateItemPage({itemsList, onDiningChange, setNavItem}) 
 
     const postItem = async item => {
         try {
-          const response = await FoodItemAPI.postItem(item, diningHall);
-          console.log(response);
-          setName(item.name);
-          setNutritionText([]);
-          setDayList([]);
-          setDiningHall("");
-          setSubmitted(!submitted);
-          setModalOpen(true);
+            //post and reset
+            const response = await FoodItemAPI.postItem(item, diningHall);
+            console.log(response);
+            setName(item.name);
+            setNutritionText([]);
+            setDayList([]);
+            setDiningHall("");
+            setSubmitted(!submitted);
+            setModalOpen(true);
         } catch(err) {
-          console.log(err);
+            console.log(err);
         }
       };
 
     React.useEffect(() => {
+        //if item is set, post the item
         if (item) {
           postItem(item.state);
         }
@@ -95,33 +99,32 @@ export default function CreateItemPage({itemsList, onDiningChange, setNavItem}) 
                     <Box className={s.header}>
                     <b>Creation Form</b>
                     </Box>      
-                    <Stack sx={{margin: "20px", justifyContent:"center"}} 
-                    spacing={3}
-                    divider={<Divider orientation="horizontal" flexItem />}
+                    <Stack 
+                        sx={{margin: "20px", justifyContent:"center"}} 
+                        pacing={3}
+                        divider={<Divider orientation="horizontal" flexItem />}
                     >
+                        <NutritionTextFields onAllFilled={setNutritionText} submitted={submitted}/>
 
-                    <NutritionTextFields onAllFilled={setNutritionText} submitted={submitted}/>
+                        <DiningSelect onSelectChange={setDiningHall} submitted={submitted}/>            
 
-                    <DiningSelect onSelectChange={setDiningHall} submitted={submitted}/>            
-
-                    <DayChecklist onCheckChange={setDayList} submitted={submitted}/>
-                    
-                    <FormControl fullWidth>
-                        <FormGroup sx={{justifyContent:"center"}}>
-                            <Button 
-                                className={s.submit}
-                                sx={{marginLeft:"43%", color: "rgb(134,15,31)"}}
-                                onClick={submit}
-                                >
-                                Submit
-                            </Button>
-                        </FormGroup>
-                    </FormControl>
+                        <DayChecklist onCheckChange={setDayList} submitted={submitted}/>
+                        
+                        <FormControl fullWidth>
+                            <FormGroup sx={{justifyContent:"center"}}>
+                                <Button 
+                                    className={s.submit}
+                                    sx={{marginLeft:"43%", color: "rgb(134,15,31)"}}
+                                    onClick={submit}
+                                    >
+                                    Submit
+                                </Button>
+                            </FormGroup>
+                        </FormControl>
 
                     </Stack>
                 </Box>
             </div>
         </>
-
     );
 }

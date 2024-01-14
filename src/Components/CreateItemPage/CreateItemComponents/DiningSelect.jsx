@@ -1,8 +1,5 @@
-import * as React from "react";
 import {FormControl, InputLabel, MenuItem, Select} from "@mui/material";
-import DiningGrid from "../../HomePage/HomeComponents/DiningGrid/DiningGrid";
-
-
+import * as React from "react";
 
 export default function DiningSelect({onSelectChange, submitted}) {
     const [diningHall, setDiningHall] = React.useState('');
